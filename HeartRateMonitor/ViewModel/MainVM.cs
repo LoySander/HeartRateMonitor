@@ -6,17 +6,24 @@ using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Windows.Devices.Enumeration;
 
 namespace HeartRateMonitor.ViewModel
 {
+    enum TypeFile
+    {
+        CSV,
+        Nothing
+    }
     class MainVM : INotifyPropertyChanged
     { 
         private RelayCommand openFindViewCommand;
         private RelayCommand startСommand;
         private RelayCommand disconnectCommand;
+        private RelayCommand stopCommand;
         private WindowService showService;
         private OurDeviceInformation device;
         private string _selectedDevice;
@@ -25,7 +32,8 @@ namespace HeartRateMonitor.ViewModel
         private ConnectionToBLE connection;
         private HeartRate heartRate;
         public event PropertyChangedEventHandler PropertyChanged;
-
+        private bool isSafeData;
+        private TypeFile typeFile = TypeFile.Nothing;
         public MainVM()
         {
            showService = new WindowService();
@@ -62,6 +70,7 @@ namespace HeartRateMonitor.ViewModel
                     (disconnectCommand = new RelayCommand(obj =>
                     {
                         connection.Disconnect(device.Device);
+                        Thread.Sleep(200);
                         showService.ShowMessageBox(connection.GetBluetoothLE().ConnectionStatus.ToString());
                     }));
             }
@@ -76,6 +85,18 @@ namespace HeartRateMonitor.ViewModel
                     {
                         await heartRate.StartHeartrateMonitorAsync(connection.GetBluetoothLE());
                         SelectedDevice = device.Device.Name.ToString();
+                    }));
+            }
+        }
+        public RelayCommand StopCommand
+        {
+            get
+            {
+                return stopCommand ??
+                    (stopCommand = new RelayCommand(obj =>
+                    {
+                        heartRate.StopHeartRate();
+                        showService.ShowMessageBox("Stopping");
                     }));
             }
         }
@@ -110,6 +131,30 @@ namespace HeartRateMonitor.ViewModel
             if (PropertyChanged != null)
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(prop));
+            }
+        }
+        public bool IsSafeData
+        {
+            get { return isSafeData; }
+            set { isSafeData = value;
+                OnPropertyChanged(nameof(IsSafeData));
+                showService.ShowMessageBox("Хорошо, данные будут записываться в файл");
+            }
+        }
+
+        public TypeFile TypeFile
+        {
+            get { return typeFile; }
+            set
+            {
+                if (typeFile == value)
+                    return;
+                typeFile = value;
+                OnPropertyChanged("TypeFile");
+                OnPropertyChanged("IsLowPriority");
+                OnPropertyChanged("IsMiddlePriority");
+                OnPropertyChanged("IsHighPriority");
+                OnPropertyChanged("GetResult");
             }
         }
 

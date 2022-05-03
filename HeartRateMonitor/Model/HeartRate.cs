@@ -39,75 +39,86 @@ namespace HeartRateMonitor.Model
         private string _heartRate;
         public event PropertyChangedEventHandler PropertyChanged;
         private Thread keepHeartrateAliveThread;
+        private StringBuilder csvcontent = null;
+        private bool isHeartRateStarted;
+       
 
 
         public HeartRate(MainVM x)
         {
             mainVM = x;
+            isHeartRateStarted = false;
+            csvcontent = new StringBuilder();
+            csvcontent.AppendLine("Date,Rate");
         }
 
         public async Task StartHeartrateMonitorAsync(BluetoothLEDevice bluetoothLE)
         {
-            GattCharacteristic sensorCharacteristic = null;
-            GattDeviceServicesResult sensorService = await bluetoothLE.GetGattServicesForUuidAsync(new Guid(SENSOR_SRV_ID));
-
-            if (sensorService.Status == GattCommunicationStatus.Success && sensorService.Services.Count > 0)
+            if (isHeartRateStarted)
             {
-                _sensorService = sensorService.Services[0];
-
-                GattCharacteristicsResult characteristic = await _sensorService.GetCharacteristicsForUuidAsync(new Guid(SENSOR_CHAR_ID));
-
-                if (characteristic.Status == GattCommunicationStatus.Success && characteristic.Characteristics.Count > 0)
-                {
-                    sensorCharacteristic = characteristic.Characteristics[0];
-                    //BLE.Write(sensorCharacteristic, new byte[] { 0x01, 0x03, 0x19 });
-                    Write(sensorCharacteristic, new byte[] { 0x01, 0x03, 0x19 });
-                }
+                return;
             }
+            
+                GattCharacteristic sensorCharacteristic = null;
+                GattDeviceServicesResult sensorService = await bluetoothLE.GetGattServicesForUuidAsync(new Guid(SENSOR_SRV_ID));
 
-            GattDeviceServicesResult heartrateService = await bluetoothLE.GetGattServicesForUuidAsync(new Guid(HEARTRATE_SRV_ID));
-
-            if (heartrateService.Status == GattCommunicationStatus.Success && heartrateService.Services.Count > 0)
-            {
-                _heartrateService = heartrateService.Services[0];
-
-                GattCharacteristicsResult heartrateNotifyCharacteristic = await _heartrateService.GetCharacteristicsForUuidAsync(new Guid(HEARTRATE_NOTIFY_CHAR_ID));
-
-                if (heartrateNotifyCharacteristic.Status == GattCommunicationStatus.Success && heartrateNotifyCharacteristic.Characteristics.Count > 0)
+                if (sensorService.Status == GattCommunicationStatus.Success && sensorService.Services.Count > 0)
                 {
-                    GattCommunicationStatus notify = await heartrateNotifyCharacteristic.Characteristics[0].WriteClientCharacteristicConfigurationDescriptorAsync(GattClientCharacteristicConfigurationDescriptorValue.Notify);
+                    _sensorService = sensorService.Services[0];
 
-                    if (notify == GattCommunicationStatus.Success)
+                    GattCharacteristicsResult characteristic = await _sensorService.GetCharacteristicsForUuidAsync(new Guid(SENSOR_CHAR_ID));
+
+                    if (characteristic.Status == GattCommunicationStatus.Success && characteristic.Characteristics.Count > 0)
                     {
-                        _heartrateNotifyCharacteristic = heartrateNotifyCharacteristic.Characteristics[0];
-                        _heartrateNotifyCharacteristic.ValueChanged += Characteristic_ValueChanged;
+                        sensorCharacteristic = characteristic.Characteristics[0];
+                        //BLE.Write(sensorCharacteristic, new byte[] { 0x01, 0x03, 0x19 });
+                        Write(sensorCharacteristic, new byte[] { 0x01, 0x03, 0x19 });
                     }
                 }
 
-                GattCharacteristicsResult heartrateCharacteristicResult = await _heartrateService.GetCharacteristicsForUuidAsync(new Guid(HEARTRATE_CHAR_ID));
+                GattDeviceServicesResult heartrateService = await bluetoothLE.GetGattServicesForUuidAsync(new Guid(HEARTRATE_SRV_ID));
 
-                if (heartrateCharacteristicResult.Status == GattCommunicationStatus.Success && heartrateCharacteristicResult.Characteristics.Count > 0)
+                if (heartrateService.Status == GattCommunicationStatus.Success && heartrateService.Services.Count > 0)
                 {
-                    _heartrateCharacteristic = heartrateCharacteristicResult.Characteristics[0];
+                    _heartrateService = heartrateService.Services[0];
 
-                    if (true)
+                    GattCharacteristicsResult heartrateNotifyCharacteristic = await _heartrateService.GetCharacteristicsForUuidAsync(new Guid(HEARTRATE_NOTIFY_CHAR_ID));
+
+                    if (heartrateNotifyCharacteristic.Status == GattCommunicationStatus.Success && heartrateNotifyCharacteristic.Characteristics.Count > 0)
                     {
-                        Write(_heartrateCharacteristic, new byte[] { 0x15, 0x01, 0x01 });
+                        GattCommunicationStatus notify = await heartrateNotifyCharacteristic.Characteristics[0].WriteClientCharacteristicConfigurationDescriptorAsync(GattClientCharacteristicConfigurationDescriptorValue.Notify);
 
-                        keepHeartrateAliveThread = new Thread(new ThreadStart(RunHeartrateKeepAlive));
-                        keepHeartrateAliveThread.Start();
+                        if (notify == GattCommunicationStatus.Success)
+                        {
+                            _heartrateNotifyCharacteristic = heartrateNotifyCharacteristic.Characteristics[0];
+                            _heartrateNotifyCharacteristic.ValueChanged += Characteristic_ValueChanged;
+                        }
                     }
-                    else
-                    {
-                        Write(_heartrateCharacteristic, new byte[] { 0x15, 0x02, 0x01 });
-                    }
 
-                    if (sensorCharacteristic != null)
+                    GattCharacteristicsResult heartrateCharacteristicResult = await _heartrateService.GetCharacteristicsForUuidAsync(new Guid(HEARTRATE_CHAR_ID));
+
+                    if (heartrateCharacteristicResult.Status == GattCommunicationStatus.Success && heartrateCharacteristicResult.Characteristics.Count > 0)
                     {
-                        Write(sensorCharacteristic, new byte[] { 0x02 });
+                        _heartrateCharacteristic = heartrateCharacteristicResult.Characteristics[0];
+
+                        if (true)
+                        {
+                            Write(_heartrateCharacteristic, new byte[] { 0x15, 0x01, 0x01 });
+                            keepHeartrateAliveThread = new Thread(new ThreadStart(RunHeartrateKeepAlive));
+                            keepHeartrateAliveThread.Start();
+                        }
+                        else
+                        {
+                            Write(_heartrateCharacteristic, new byte[] { 0x15, 0x02, 0x01 });
+                        }
+
+                        if (sensorCharacteristic != null)
+                        {
+                            Write(sensorCharacteristic, new byte[] { 0x02 });
+                        }
                     }
                 }
-            }
+            isHeartRateStarted = true;
         }
         static async public void Write(GattCharacteristic characteristic, byte[] data)
         {
@@ -162,6 +173,7 @@ namespace HeartRateMonitor.Model
             get { return _heartRate; }
             set {
                  _heartRate = value;
+                csvcontent.AppendLine(string.Format("{0},{1}", DateTime.Now, value));
                 OnPropertyChanged(nameof(HeartRateLevel));
             }
         }
@@ -198,6 +210,43 @@ namespace HeartRateMonitor.Model
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(prop));
             }
+        }
+
+        public void StopHeartRate()
+        {
+            if (!isHeartRateStarted)
+                return;
+
+            if (keepHeartrateAliveThread != null)
+            {
+                keepHeartrateAliveThread.Abort();
+                keepHeartrateAliveThread = null;
+            }
+
+            if (_heartrateCharacteristic != null)
+            {
+                Write(_heartrateCharacteristic, new byte[] { 0x15, 0x01, 0x00 });
+                Write(_heartrateCharacteristic, new byte[] { 0x15, 0x02, 0x00 });
+            }
+
+            _heartrateCharacteristic = null;
+
+            _heartrateNotifyCharacteristic = null;
+
+            if (_heartrateService != null)
+            {
+                _heartrateService.Dispose();
+                _heartrateService = null;
+            }
+
+            if (_sensorService != null)
+            {
+                _sensorService.Dispose();
+                _sensorService = null;
+            }
+            HeartRateLevel = 0.ToString();
+            isHeartRateStarted = false;
+            GC.Collect();
         }
     }
 
