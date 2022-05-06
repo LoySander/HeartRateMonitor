@@ -18,15 +18,6 @@ namespace HeartRateMonitor.Model
 
         byte[] _key;
 
-        GattDeviceService _heartrateService = null;
-
-        GattCharacteristic _heartrateCharacteristic = null;
-
-        GattCharacteristic _heartrateNotifyCharacteristic = null;
-
-        GattDeviceService _sensorService = null;
-
-      
 
         public async Task AuthenticateAsync(BluetoothLEDevice bluetoothLE)
         {

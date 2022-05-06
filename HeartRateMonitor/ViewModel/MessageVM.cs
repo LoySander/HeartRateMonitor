@@ -20,10 +20,12 @@ namespace HeartRateMonitor.ViewModel
         private RelayCommand cancelCommand;
         private MiBand authenticate;
         private ConnectionToBLE connection;
+        private OurDeviceInformation device;
         public MessageVM(MessageBoxService messageBoxService, WindowService windowService)
         {
             this.messageBoxService = messageBoxService;
             this.windowService = windowService;
+            device = new OurDeviceInformation();
             authenticate = new MiBand();
             connection = ConnectionToBLE.getInstance();
         }
@@ -54,6 +56,7 @@ namespace HeartRateMonitor.ViewModel
                 return cancelCommand ??
                     (cancelCommand = new RelayCommand(obj =>
                     {
+                        connection.Disconnect(device.Device);
                         messageBoxService.ShowOrOpen(1, this, false);
                     }));
             }

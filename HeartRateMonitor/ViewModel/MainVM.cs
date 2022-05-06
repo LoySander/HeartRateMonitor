@@ -13,11 +13,7 @@ using Windows.Devices.Enumeration;
 
 namespace HeartRateMonitor.ViewModel
 {
-    enum TypeFile
-    {
-        CSV,
-        Nothing
-    }
+  
     class MainVM : INotifyPropertyChanged
     { 
         private RelayCommand openFindViewCommand;
@@ -27,21 +23,22 @@ namespace HeartRateMonitor.ViewModel
         private WindowService showService;
         private OurDeviceInformation device;
         private string _selectedDevice;
-        private string _valueHeartRate;
         private MiBand authenticate;
         private ConnectionToBLE connection;
         private HeartRate heartRate;
         public event PropertyChangedEventHandler PropertyChanged;
         private bool isSafeData;
-        private TypeFile typeFile = TypeFile.Nothing;
+        private bool isSound;
+        private string age;
+        private string heartRateSimple;
+      
         public MainVM()
         {
            showService = new WindowService();
            device = new OurDeviceInformation();
            authenticate = new MiBand();
            connection = ConnectionToBLE.getInstance();
-           heartRate = new HeartRate(this);
-            //ShowFindViewCommand = new RelayCommand(ShowFirstView);
+           heartRate = new HeartRate();
         }
 
         public HeartRate HeartRate
@@ -69,6 +66,7 @@ namespace HeartRateMonitor.ViewModel
                 return disconnectCommand ??
                     (disconnectCommand = new RelayCommand(obj =>
                     {
+                        heartRate.StopHeartRate();
                         connection.Disconnect(device.Device);
                         Thread.Sleep(200);
                         showService.ShowMessageBox(connection.GetBluetoothLE().ConnectionStatus.ToString());
@@ -83,6 +81,8 @@ namespace HeartRateMonitor.ViewModel
                 return startСommand ??
                     (startСommand = new RelayCommand(async obj =>
                     {
+                        heartRate.IsSafeData = isSafeData;
+                        heartRate.IsSound = isSound;
                         await heartRate.StartHeartrateMonitorAsync(connection.GetBluetoothLE());
                         SelectedDevice = device.Device.Name.ToString();
                     }));
@@ -114,18 +114,7 @@ namespace HeartRateMonitor.ViewModel
                 OnPropertyChanged(nameof(SelectedDevice));
             }
         }
-
-        public string ValueHeartRate
-        {
-            get { return _valueHeartRate; }
-            set
-            {
-                _valueHeartRate = value;
-                OnPropertyChanged(nameof(ValueHeartRate));
-            }
-
-        }
-
+       
         public void OnPropertyChanged([CallerMemberName] string prop = "")
         {
             if (PropertyChanged != null)
@@ -141,22 +130,34 @@ namespace HeartRateMonitor.ViewModel
                 showService.ShowMessageBox("Хорошо, данные будут записываться в файл");
             }
         }
-
-        public TypeFile TypeFile
+        
+        public bool IsSound
         {
-            get { return typeFile; }
-            set
-            {
-                if (typeFile == value)
-                    return;
-                typeFile = value;
-                OnPropertyChanged("TypeFile");
-                OnPropertyChanged("IsLowPriority");
-                OnPropertyChanged("IsMiddlePriority");
-                OnPropertyChanged("IsHighPriority");
-                OnPropertyChanged("GetResult");
+            get { return isSound; }
+            set {
+                isSound = value;
+                OnPropertyChanged(nameof(IsSound));
+                showService.ShowMessageBox("Хорошо, вы включили звуковое оповещение");
             }
         }
 
+        public string Age
+        {
+            get { return age; }
+            set { age = value;
+                OnPropertyChanged(nameof(Age));
+            }
+        }
+
+        public string HeartRateSimple
+        {
+            get { return heartRateSimple; }
+            set
+            {
+                heartRateSimple = value;
+                OnPropertyChanged(nameof(HeartRateSimple));
+            }
+        }
+       
     }
 }

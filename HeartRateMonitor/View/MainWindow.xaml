@@ -7,28 +7,58 @@
         xmlns:viewmodel="clr-namespace:HeartRateMonitor.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:MainVM}"
         mc:Ignorable="d"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        Title="HeartRateMonitor" Height="450" Width="800" WindowStyle="ThreeDBorderWindow">
+        Title="HeartRateMonitor" Height="450" Width="800" WindowStyle="ThreeDBorderWindow"
+       WindowStartupLocation="CenterScreen">
     <Grid x:Name="MainRoot" Background="GhostWhite">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0*"/>
             <ColumnDefinition Width="139*"/>
             <ColumnDefinition Width="655*"/>
         </Grid.ColumnDefinitions>
-        <Border BorderBrush="Black" Background="Gray"  BorderThickness="1" HorizontalAlignment="Left" Height="184" Margin="246.8,10,0,0" VerticalAlignment="Top" Width="399" Grid.Column="2"/>
-        <Border BorderBrush="Black" Background="Gray" BorderThickness="1" Grid.ColumnSpan="3" HorizontalAlignment="Left" Height="394" Margin="19,9,0,0" VerticalAlignment="Top" Width="351">
-            <TextBlock Background ="Beige" TextWrapping="Wrap" Text="TextBlock" Margin="3.2,10.2,7.4,268.8"/>
-        </Border>
-        <Button Command="{Binding OpenFindViewCommand}" Grid.ColumnSpan="3" Content="Поиск устройств" HorizontalAlignment="Left" Margin="26,160,0,0" VerticalAlignment="Top" Width="161"/>
-        <Label Content="Ваше устройство:" HorizontalAlignment="Left" Margin="263.8,240,0,0" VerticalAlignment="Top" Width="110" Height="28" Grid.Column="2"/>
-        <Label Content="{Binding SelectedDevice}"  HorizontalAlignment="Left" Margin="373.8,241,0,0" VerticalAlignment="Top" Width="110" Height="28" Grid.Column="2"/>
-        <Button Command="{Binding StartСommand}" Grid.ColumnSpan="3" Content="Старт" HorizontalAlignment="Left" Margin="25,201,0,0" VerticalAlignment="Top" Width="161"/>
-        <Border BorderBrush="Black" Background="White" BorderThickness="1" Grid.Column="2" HorizontalAlignment="Left" Height="100" Margin="335.8,45,0,0" VerticalAlignment="Top" Width="212">
-            <Label Content="ЧСС:" Margin="33.2,32.2,119.2,41.2" FontFamily="Showcard Gothic" FontSize="16"/>
-        </Border>
-        <Label Content="{Binding HeartRate.HeartRateLevel}" Margin="430.8,77,116.6,301" Grid.Column="2" RenderTransformOrigin="0.976,0.478"/>
-        <Button Command="{Binding DisconnectCommand}" Content="Отключить" HorizontalAlignment="Left" Margin="480.8,158,0,0" VerticalAlignment="Top" Width="161" Grid.Column="2"/>
-        <RadioButton IsChecked="{Binding IsSafeData}" Content="Сохранить данные " Grid.Column="2" HorizontalAlignment="Left" Margin="279.8,161,0,0" VerticalAlignment="Top" Width="137" Height="28"/>
-        <Button Command="{Binding StopCommand}" Grid.ColumnSpan="3" Content="Стоп" HorizontalAlignment="Left" Margin="24,242,0,0" VerticalAlignment="Top" Width="161"/>
+        <Border BorderBrush="Black" Background="Gray"  BorderThickness="1" HorizontalAlignment="Left" Height="198" Margin="6,11,0,0" VerticalAlignment="Top" Width="780" Grid.Column="1" Grid.ColumnSpan="2" RenderTransformOrigin="0.5,0.5">
+            <Border.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform AngleY="-0.003"/>
+                    <RotateTransform Angle="0.069"/>
+                    <TranslateTransform Y="-0.012"/>
+                </TransformGroup>
+            </Border.RenderTransform>
 
+        </Border>
+        <Border BorderBrush="Black" Background="Gray" BorderThickness="1" HorizontalAlignment="Left" Height="191" Margin="8,218,0,0" VerticalAlignment="Top" Width="329" Grid.Column="1" Grid.ColumnSpan="2"/>
+        <Button Command="{Binding OpenFindViewCommand}" Grid.ColumnSpan="3" Content="Поиск устройств" HorizontalAlignment="Left" Margin="80,246,0,0" VerticalAlignment="Top" Width="206"/>
+        <Label Content="Ваше устройство:" HorizontalAlignment="Left" Margin="320.8,228,0,0" VerticalAlignment="Top" Width="110" Height="28" Grid.Column="2"/>
+        <Label Content="{Binding SelectedDevice}"  HorizontalAlignment="Left" Margin="430.8,229,0,0" VerticalAlignment="Top" Width="110" Height="28" Grid.Column="2"/>
+        <Button Command="{Binding StartСommand}" Grid.ColumnSpan="3" Content="Старт" HorizontalAlignment="Left" Margin="80,285,0,0" VerticalAlignment="Top" Width="206"/>
+        <Border BorderBrush="Black" Background="White" BorderThickness="1" Grid.Column="1" HorizontalAlignment="Left" Height="100" Margin="72,26,0,0" VerticalAlignment="Top" Width="543" Grid.ColumnSpan="2">
+            <Label Content="ЧСС:" Margin="38.2,24.2,423.4,25.2" FontFamily="Showcard Gothic" FontSize="36" RenderTransformOrigin="0.779,0.51"/>
+        </Border>
+        <Label Content="{Binding HeartRate.HeartRateLevel}" Margin="140.8,35,182.6,314" Grid.Column="2" RenderTransformOrigin="0.976,0.478" FontSize="48"/>
+        <Button Command="{Binding DisconnectCommand}" Content="Отключить" HorizontalAlignment="Left" Margin="448.8,170,0,0" VerticalAlignment="Top" Width="161" Grid.Column="2"/>
+        <Button Command="{Binding StopCommand}" Grid.ColumnSpan="3" Content="Стоп" HorizontalAlignment="Left" Margin="81,327,0,0" VerticalAlignment="Top" Width="206"/>
+        <CheckBox Content="Сохранить данные" IsChecked="{Binding IsSafeData}" Grid.Column="1" HorizontalAlignment="Left" Margin="23,158,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+        <CheckBox Content="Звуковое сопровождение" IsChecked="{Binding IsSound}" Grid.Column="1" HorizontalAlignment="Left" Margin="23,181,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="2">
+            <CheckBox.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-0.298"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </CheckBox.RenderTransform>
+        </CheckBox>
+        <TextBox Text="{Binding Age, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" HorizontalAlignment="Left" Height="29" Margin="327.8,309,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="74"/>
+        <TextBox Text="{Binding HeartRateSimple, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" HorizontalAlignment="Left" Height="29" Margin="327.8,349,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="74"/>
+        <Label Content="Ваш возраст" Grid.Column="2" HorizontalAlignment="Left" Margin="239.8,308,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.397,0.071" Width="77" Height="29"/>
+        <Label Content="ЧСС в покое" Grid.Column="2" HorizontalAlignment="Left" Margin="239.8,348,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.397,0.071" Width="77" Height="29"/>
+        <Border BorderBrush="Black" BorderThickness="1" Grid.Column="2" HorizontalAlignment="Left" Height="130" Margin="219.8,276,0,0" VerticalAlignment="Top" Width="348">
+            <StackPanel Margin="210.2,39.2,35.2,18.8" RenderTransformOrigin="0.369,0.383">
+                <Button Content="Ок" Height="30" Margin="0,0,-0.2,0"/>
+                <Button Content="Button" Height="10" Margin="0,0,-0.2,0" Visibility="Hidden" />
+                <Button Content="Отмена" Height="30" Margin="0,0,-0.2,0"/>
+            </StackPanel>
+        </Border>
+        <StackPanel Grid.Column="2" HorizontalAlignment="Left" Height="100" Margin="233.8,292,0,0" VerticalAlignment="Top" Width="183"/>
     </Grid>
 </Window>

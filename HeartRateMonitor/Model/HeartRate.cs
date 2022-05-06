@@ -9,13 +9,15 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Media;
+using System.Windows.Threading;
 using Windows.Devices.Bluetooth;
 using Windows.Devices.Bluetooth.GenericAttributeProfile;
 using Windows.Storage.Streams;
 
 namespace HeartRateMonitor.Model
 {
-    class HeartRate : INotifyPropertyChanged
+    class HeartRate : MiBand,INotifyPropertyChanged
     {
         const string HEARTRATE_SRV_ID = "0000180d-0000-1000-8000-00805f9b34fb";
         const string HEARTRATE_CHAR_ID = "00002a39-0000-1000-8000-00805f9b34fb";
@@ -27,29 +29,42 @@ namespace HeartRateMonitor.Model
         byte[] _key;
 
         GattDeviceService _heartrateService = null;
-
         GattCharacteristic _heartrateCharacteristic = null;
-
         GattCharacteristic _heartrateNotifyCharacteristic = null;
-
         GattDeviceService _sensorService = null;
-
-        static private MainVM mainVM = null;
 
         private string _heartRate;
         public event PropertyChangedEventHandler PropertyChanged;
         private Thread keepHeartrateAliveThread;
         private StringBuilder csvcontent = null;
         private bool isHeartRateStarted;
+        private bool isSafeData = false;
+        private bool isSound = false;
+        private MediaPlayer player;
        
-
-
-        public HeartRate(MainVM x)
+        public HeartRate()
         {
-            mainVM = x;
             isHeartRateStarted = false;
+             player = new MediaPlayer();
+            player.Open(new Uri(@"C:\Users\Stas\source\repos\Test\Volume.mp3", UriKind.RelativeOrAbsolute));
             csvcontent = new StringBuilder();
             csvcontent.AppendLine("Date,Rate");
+        }
+
+        public bool IsSafeData
+        {
+            get { return isSafeData; }
+            set
+            {
+                isSafeData = value;
+            }
+        }
+        public bool IsSound
+        {
+            get { return isSound; }
+            set { isSound = value;
+                  
+            }
         }
 
         public async Task StartHeartrateMonitorAsync(BluetoothLEDevice bluetoothLE)
@@ -120,52 +135,11 @@ namespace HeartRateMonitor.Model
                 }
             isHeartRateStarted = true;
         }
-        static async public void Write(GattCharacteristic characteristic, byte[] data)
+        private delegate void PlayerStart(); //Делегат, передаваемый в метод Dispatcher.BeginInvoke
+        // А этот метод используется в качестве экземпляра передаваемого делегата TimeOutput
+        private void StartPlay()
         {
-            using (var stream = new DataWriter())
-            {
-                stream.WriteBytes(data);
-
-                try
-                {
-                    GattCommunicationStatus r = await characteristic.WriteValueAsync(stream.DetachBuffer());
-
-                    if (r != GattCommunicationStatus.Success)
-                    {
-                        Console.WriteLine(string.Format("Unable to write on {0} - {1}", characteristic.Uuid, r));
-                    }
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e);
-                }
-            }
-        }
-
-        byte[] EncryptAuthenticationNumber(byte[] number)
-        {
-            byte[] r;
-
-            using (Aes aes = Aes.Create())
-            {
-                aes.Key = _key;
-                aes.Mode = CipherMode.ECB;
-                aes.Padding = PaddingMode.None;
-
-                ICryptoTransform encryptor = aes.CreateEncryptor(aes.Key, new byte[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 });
-
-                using (MemoryStream stream = new MemoryStream())
-                {
-                    using (CryptoStream cryptoStream = new CryptoStream(stream, encryptor, CryptoStreamMode.Write))
-                    {
-                        cryptoStream.Write(number, 0, number.Length);
-                        cryptoStream.FlushFinalBlock();
-                        r = stream.ToArray();
-                    }
-                }
-            }
-
-            return r;
+            player.Play();
         }
 
         public string HeartRateLevel
@@ -173,7 +147,11 @@ namespace HeartRateMonitor.Model
             get { return _heartRate; }
             set {
                  _heartRate = value;
-                csvcontent.AppendLine(string.Format("{0},{1}", DateTime.Now, value));
+                if (int.Parse(_heartRate) > 80 && isSound == true)
+                {
+                    player.Dispatcher.BeginInvoke(new PlayerStart(StartPlay));
+                }
+                csvcontent.AppendLine(string.Format("{0},{1}", DateTime.Now, _heartRate));
                 OnPropertyChanged(nameof(HeartRateLevel));
             }
         }
@@ -185,12 +163,6 @@ namespace HeartRateMonitor.Model
             var reader = DataReader.FromBuffer(args.CharacteristicValue);
             var x = reader.ReadInt16();
             HeartRateLevel = x.ToString();
-          //  mainVM.ValueHeartRate = x.ToString();
-           
-            //var flags = reader.ReadByte();
-            //var value = reader.ReadByte();
-            //Console.WriteLine($"{flags}- {value}");
-            //throw new NotImplementedException();
         }
         void RunHeartrateKeepAlive()
         {
@@ -199,7 +171,7 @@ namespace HeartRateMonitor.Model
                 while (_heartrateCharacteristic != null)
                 {
                     Write(_heartrateCharacteristic, new byte[] { 0x16 });
-                    Thread.Sleep(5000);
+                    Thread.Sleep(3000);
                 }
             }
             catch (ThreadAbortException) { }
@@ -214,6 +186,10 @@ namespace HeartRateMonitor.Model
 
         public void StopHeartRate()
         {
+            if (isSafeData)
+            {
+                File.AppendAllText(@"C:\Users\Stas\Desktop\data.csv", csvcontent.ToString());
+            }
             if (!isHeartRateStarted)
                 return;
 
