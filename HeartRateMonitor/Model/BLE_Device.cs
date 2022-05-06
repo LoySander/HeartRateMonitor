@@ -131,11 +131,6 @@ namespace HeartRateMonitor.Model
                 Thread.Sleep(500);
             }
         }
-      
-    
-
-    //throw new NotImplementedException();
-
 
     public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName]string prop = "")

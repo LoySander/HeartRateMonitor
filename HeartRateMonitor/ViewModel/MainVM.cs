@@ -20,6 +20,8 @@ namespace HeartRateMonitor.ViewModel
         private RelayCommand startСommand;
         private RelayCommand disconnectCommand;
         private RelayCommand stopCommand;
+        private RelayCommand setNormHeartRate;
+        private RelayCommand cancelNormHeartRate;
         private WindowService showService;
         private OurDeviceInformation device;
         private string _selectedDevice;
@@ -31,6 +33,7 @@ namespace HeartRateMonitor.ViewModel
         private bool isSound;
         private string age;
         private string heartRateSimple;
+        
       
         public MainVM()
         {
@@ -100,6 +103,29 @@ namespace HeartRateMonitor.ViewModel
                     }));
             }
         }
+        public RelayCommand CancelNormHeartRate
+        {
+            get
+            {
+                return cancelNormHeartRate ??
+                    (cancelNormHeartRate = new RelayCommand(obj =>
+                    {
+                        Age = "";
+                       HeartRateSimple = "";
+                    }));
+            }
+        }
+        public RelayCommand SetHeartRateNorm
+        {
+            get
+            {
+                return setNormHeartRate ??
+                    (setNormHeartRate = new RelayCommand(obj =>
+                    {
+                        heartRate.SetNormHeartRate(int.Parse(Age), int.Parse(HeartRateSimple));
+                    }));
+            }
+        }
         public void ShowFindView()
         {
             FindVM vm = new FindVM(this.device,this.showService);
@@ -158,6 +184,7 @@ namespace HeartRateMonitor.ViewModel
                 OnPropertyChanged(nameof(HeartRateSimple));
             }
         }
+
        
     }
 }

@@ -41,6 +41,7 @@ namespace HeartRateMonitor.Model
         private bool isSafeData = false;
         private bool isSound = false;
         private MediaPlayer player;
+        private int norm = 0;
        
         public HeartRate()
         {
@@ -156,7 +157,10 @@ namespace HeartRateMonitor.Model
             }
         }
 
-     
+        public void SetNormHeartRate(int age, int heartRateSimple)
+        {
+            norm = ((int)(((206 - (0.685 * age)) - heartRateSimple) * 0.5 * (206 - (0.685 * age)) + heartRateSimple));
+        }
 
         private void Characteristic_ValueChanged(GattCharacteristic sender, GattValueChangedEventArgs args)
         {
