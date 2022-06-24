@@ -7,7 +7,7 @@
         xmlns:viewmodel="clr-namespace:HeartRateMonitor.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:MainVM}"
         mc:Ignorable="d"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        Title="HeartRateMonitor" Height="450" Width="800" WindowStyle="ThreeDBorderWindow"
+        Title="Мониторинг ЧСС" Height="450" Width="800" WindowStyle="ThreeDBorderWindow"
        WindowStartupLocation="CenterScreen">
     <Grid x:Name="MainRoot" Background="GhostWhite">
         <Grid.ColumnDefinitions>
@@ -15,7 +15,7 @@
             <ColumnDefinition Width="139*"/>
             <ColumnDefinition Width="655*"/>
         </Grid.ColumnDefinitions>
-        <Border BorderBrush="Black" Background="Gray"  BorderThickness="1" HorizontalAlignment="Left" Height="198" Margin="6,11,0,0" VerticalAlignment="Top" Width="780" Grid.Column="1" Grid.ColumnSpan="2" RenderTransformOrigin="0.5,0.5">
+        <Border BorderBrush="Black" Background="#D4BFF9"  BorderThickness="1" HorizontalAlignment="Left" Height="198" Margin="6,11,0,0" VerticalAlignment="Top" Width="748" Grid.Column="1" Grid.ColumnSpan="2" RenderTransformOrigin="0.5,0.5">
             <Border.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -26,17 +26,17 @@
             </Border.RenderTransform>
 
         </Border>
-        <Border BorderBrush="Black" Background="Gray" BorderThickness="1" HorizontalAlignment="Left" Height="191" Margin="8,218,0,0" VerticalAlignment="Top" Width="329" Grid.Column="1" Grid.ColumnSpan="2"/>
-        <Button Command="{Binding OpenFindViewCommand}" Grid.ColumnSpan="3" Content="Поиск устройств" HorizontalAlignment="Left" Margin="80,246,0,0" VerticalAlignment="Top" Width="206"/>
-        <Label Content="Ваше устройство:" HorizontalAlignment="Left" Margin="320.8,228,0,0" VerticalAlignment="Top" Width="110" Height="28" Grid.Column="2"/>
-        <Label Content="{Binding SelectedDevice}"  HorizontalAlignment="Left" Margin="430.8,229,0,0" VerticalAlignment="Top" Width="110" Height="28" Grid.Column="2"/>
-        <Button Command="{Binding StartСommand}" Grid.ColumnSpan="3" Content="Старт" HorizontalAlignment="Left" Margin="80,285,0,0" VerticalAlignment="Top" Width="206"/>
-        <Border BorderBrush="Black" Background="White" BorderThickness="1" Grid.Column="1" HorizontalAlignment="Left" Height="100" Margin="72,26,0,0" VerticalAlignment="Top" Width="543" Grid.ColumnSpan="2">
-            <Label Content="ЧСС:" Margin="38.2,24.2,423.4,25.2" FontFamily="Showcard Gothic" FontSize="36" RenderTransformOrigin="0.779,0.51"/>
+        <Border BorderBrush="Black" Background="#D4BFF9" BorderThickness="1" HorizontalAlignment="Left" Height="185" Margin="6,226,0,0" VerticalAlignment="Top" Width="320" Grid.Column="1" Grid.ColumnSpan="2"/>
+        <Button Command="{Binding OpenFindViewCommand}" Grid.ColumnSpan="3" Content="Поиск устройств" HorizontalAlignment="Left" Margin="65,252,0,0" VerticalAlignment="Top" Width="206"/>
+        <Label Content="Ваше устройство:" HorizontalAlignment="Left" Margin="290.8,235,0,0" VerticalAlignment="Top" Width="110" Height="28" Grid.Column="2"/>
+        <Label Content="{Binding SelectedDevice}"  HorizontalAlignment="Left" Margin="400.8,235,0,0" VerticalAlignment="Top" Width="110" Height="28" Grid.Column="2"/>
+        <Button Command="{Binding StartСommand}" Grid.ColumnSpan="3" Content="Старт" HorizontalAlignment="Left" Margin="65,291,0,0" VerticalAlignment="Top" Width="206"/>
+        <Border BorderBrush="Black" Background="White" BorderThickness="1" Grid.Column="1" HorizontalAlignment="Left" Height="100" Margin="72,26,0,0" VerticalAlignment="Top" Width="585" Grid.ColumnSpan="2">
+            <Label Content="ЧСС:" Margin="38.2,24.2,418,14.2" FontFamily="Showcard Gothic" FontSize="36" RenderTransformOrigin="0.779,0.51"/>
         </Border>
-        <Label Content="{Binding HeartRate.HeartRateLevel}" Margin="140.8,35,182.6,314" Grid.Column="2" RenderTransformOrigin="0.976,0.478" FontSize="48"/>
+        <Label Content="{Binding HeartRate.HeartRateLevel}" Margin="0,35,198.6,307" Grid.Column="2" RenderTransformOrigin="0.976,0.478" FontSize="48" HorizontalAlignment="Right" Width="335"/>
         <Button Command="{Binding DisconnectCommand}" Content="Отключить" HorizontalAlignment="Left" Margin="448.8,170,0,0" VerticalAlignment="Top" Width="161" Grid.Column="2"/>
-        <Button Command="{Binding StopCommand}" Grid.ColumnSpan="3" Content="Стоп" HorizontalAlignment="Left" Margin="81,327,0,0" VerticalAlignment="Top" Width="206"/>
+        <Button Command="{Binding StopCommand}" Grid.ColumnSpan="3" Content="Стоп" HorizontalAlignment="Left" Margin="65,331,0,0" VerticalAlignment="Top" Width="206"/>
         <CheckBox Content="Сохранить данные" IsChecked="{Binding IsSafeData}" Grid.Column="1" HorizontalAlignment="Left" Margin="23,158,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
         <CheckBox Content="Звуковое сопровождение" IsChecked="{Binding IsSound}" Grid.Column="1" HorizontalAlignment="Left" Margin="23,181,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="2">
             <CheckBox.RenderTransform>

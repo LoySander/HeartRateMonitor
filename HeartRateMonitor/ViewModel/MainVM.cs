@@ -34,11 +34,10 @@ namespace HeartRateMonitor.ViewModel
         private string age;
         private string heartRateSimple;
         
-      
         public MainVM()
         {
            showService = new WindowService();
-           device = new OurDeviceInformation();
+           device = OurDeviceInformation.getInstance();
            authenticate = new MiBand();
            connection = ConnectionToBLE.getInstance();
            heartRate = new HeartRate();
@@ -86,7 +85,18 @@ namespace HeartRateMonitor.ViewModel
                     {
                         heartRate.IsSafeData = isSafeData;
                         heartRate.IsSound = isSound;
-                        await heartRate.StartHeartrateMonitorAsync(connection.GetBluetoothLE());
+                        if(heartRate.Norm == 0)
+                        {
+                            heartRate.Norm = 130;
+                        }
+                        try
+                        {
+                            await heartRate.StartHeartrateMonitorAsync(connection.GetBluetoothLE());
+                        }
+                        catch(Exception ex)
+                        {
+                            await heartRate.StartHeartrateMonitorAsync(connection.GetBluetoothLE());
+                        }
                         SelectedDevice = device.Device.Name.ToString();
                     }));
             }
@@ -174,7 +184,6 @@ namespace HeartRateMonitor.ViewModel
                 OnPropertyChanged(nameof(Age));
             }
         }
-
         public string HeartRateSimple
         {
             get { return heartRateSimple; }
@@ -185,6 +194,5 @@ namespace HeartRateMonitor.ViewModel
             }
         }
 
-       
     }
 }

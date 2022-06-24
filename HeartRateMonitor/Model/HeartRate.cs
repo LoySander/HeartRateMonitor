@@ -49,9 +49,8 @@ namespace HeartRateMonitor.Model
              player = new MediaPlayer();
             player.Open(new Uri(@"C:\Users\Stas\source\repos\Test\Volume.mp3", UriKind.RelativeOrAbsolute));
             csvcontent = new StringBuilder();
-            csvcontent.AppendLine("Date,Rate");
+            csvcontent.AppendLine("Date;Rate");
         }
-
         public bool IsSafeData
         {
             get { return isSafeData; }
@@ -67,7 +66,14 @@ namespace HeartRateMonitor.Model
                   
             }
         }
-
+        public int Norm
+        {
+            get { return norm; }
+            set
+            {
+                norm = value;
+            }
+        }
         public async Task StartHeartrateMonitorAsync(BluetoothLEDevice bluetoothLE)
         {
             if (isHeartRateStarted)
@@ -148,18 +154,18 @@ namespace HeartRateMonitor.Model
             get { return _heartRate; }
             set {
                  _heartRate = value;
-                if (int.Parse(_heartRate) > 80 && isSound == true)
+                if (int.Parse(_heartRate) > norm && isSound == true)
                 {
                     player.Dispatcher.BeginInvoke(new PlayerStart(StartPlay));
                 }
-                csvcontent.AppendLine(string.Format("{0},{1}", DateTime.Now, _heartRate));
+                csvcontent.AppendLine($"{DateTime.Now.ToString("T")};{ _heartRate}");
                 OnPropertyChanged(nameof(HeartRateLevel));
             }
         }
 
         public void SetNormHeartRate(int age, int heartRateSimple)
         {
-            norm = ((int)(((206 - (0.685 * age)) - heartRateSimple) * 0.5 * (206 - (0.685 * age)) + heartRateSimple));
+            norm = ((int)(((206 - (0.685 * age)) - heartRateSimple) * 0.5 + heartRateSimple));
         }
 
         private void Characteristic_ValueChanged(GattCharacteristic sender, GattValueChangedEventArgs args)

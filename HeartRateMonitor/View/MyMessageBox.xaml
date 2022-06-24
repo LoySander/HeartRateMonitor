@@ -6,11 +6,16 @@
         xmlns:local="clr-namespace:HeartRateMonitor.View"
           xmlns:viewmodel="clr-namespace:HeartRateMonitor.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:MessageVM}"
         mc:Ignorable="d"
-        Title="Подключение" Height="200" Width="700" ResizeMode="NoResize">
+        Title="Подключение" Height="200" Width="600" ResizeMode="NoResize" FontSize="18">
     <Grid>
-        <TextBlock Text="Точно ли хотите подключится к устройству?" HorizontalAlignment="Left" Margin="19,9,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="43" Width="372"/>
-        <Button Content="Да" Command="{Binding YesCommand}" HorizontalAlignment="Left" Margin="315,128,0,0" VerticalAlignment="Top" Width="116" Height="37" RenderTransformOrigin="0.519,-0.067"/>
-        <Button Content="Отмена" Command="{Binding CancelCommand}" HorizontalAlignment="Left" Margin="457,128,0,0" VerticalAlignment="Top" Width="116" Height="37" RenderTransformOrigin="0.519,-0.067"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="11*"/>
+            <ColumnDefinition Width="26*"/>
+            <ColumnDefinition Width="161*"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Text="Точно ли хотите подключится к устройству?" HorizontalAlignment="Left" Margin="19,9,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="43" Width="372" FontSize="18" Grid.ColumnSpan="3"/>
+        <Button Content="Да" Command="{Binding YesCommand}" HorizontalAlignment="Left" Margin="189.6,127,0,0" VerticalAlignment="Top" Width="116" Height="37" RenderTransformOrigin="0.519,-0.067" Grid.Column="2"/>
+        <Button Content="Отмена" Command="{Binding CancelCommand}" HorizontalAlignment="Left" Margin="339.6,127,0,0" VerticalAlignment="Top" Width="116" Height="37" RenderTransformOrigin="0.519,-0.067" Grid.Column="2"/>
 
     </Grid>
 </Window>

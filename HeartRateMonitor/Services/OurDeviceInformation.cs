@@ -11,6 +11,18 @@ namespace HeartRateMonitor.Services
     {
         static private DeviceInformation device = null;
 
+        private static OurDeviceInformation instance;
+
+        private OurDeviceInformation()
+        { }
+
+        public static OurDeviceInformation getInstance()
+        {
+            if (instance == null)
+                instance = new OurDeviceInformation();
+            return instance;
+        }
+
         public DeviceInformation Device
         {
             get;

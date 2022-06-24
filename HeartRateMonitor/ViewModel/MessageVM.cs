@@ -25,7 +25,7 @@ namespace HeartRateMonitor.ViewModel
         {
             this.messageBoxService = messageBoxService;
             this.windowService = windowService;
-            device = new OurDeviceInformation();
+            device = OurDeviceInformation.getInstance();
             authenticate = new MiBand();
             connection = ConnectionToBLE.getInstance();
         }
