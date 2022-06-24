@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="HeartRateMonitor.ViewModel.FindVM" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="17.75" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAECgEADEgAAAAAAYggBAAAAwEBAAABACAAAAAAAAIg=</HashCode>
+      <FileName>ViewModel\FindVM.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="HeartRateMonitor.ViewModel.MainVM" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="19.5" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAEAAAQCEgAAQCACokBBAIAEwCADBAAAABAAAAARoCA=</HashCode>
+      <FileName>ViewModel\MainVM.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="HeartRateMonitor.ViewModel.MessageVM" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="17.75" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAEACAAAAAAAAYAABAAAAgJACAAAQAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModel\MessageVM.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="HeartRateMonitor.ViewModel.RelayCommand" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="19.5" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAACAAQAAEAEAABAAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModel\RelayCommand.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="HeartRateMonitor.Services.MessageBoxService" Collapsed="true">
+    <Position X="13" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAEAAAAA=</HashCode>
+      <FileName>Services\MessageBoxService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HeartRateMonitor.Services.OurDeviceInformation" Collapsed="true">
+    <Position X="14.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACAAAAAgAAAAAAAAAAAABAAAQAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\OurDeviceInformation.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HeartRateMonitor.Services.WindowService" Collapsed="true">
+    <Position X="13" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAEAAAAABAAAAAAAAAAAAAAAAAAAAAAAAEAAAAA=</HashCode>
+      <FileName>Services\WindowService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HeartRateMonitor.Model.BLE_Device">
+    <Position X="17.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQgAECAAAAAgAAIgAAAAAAwAAAAEAgAEAEAAAAAIA=</HashCode>
+      <FileName>Model\BLE_Device.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Device" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="HeartRateMonitor.Model.ConnectionToBLE">
+    <Position X="19.25" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAgAAAAACAAAAAAAAAhAAAQAACAAAAAAAAA=</HashCode>
+      <FileName>Model\ConnectionToBLE.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HeartRateMonitor.Model.HeartRate" Collapsed="true">
+    <Position X="15" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>kAAAAAAAAIAAAgIgIAjIAABAwSAAgJABFgACQQCAACE=</HashCode>
+      <FileName>Model\HeartRate.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="HeartRateMonitor.Model.MiBand" Collapsed="true">
+    <Position X="15" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAACAAAABAQAAAABAAAAAAAHAAAA=</HashCode>
+      <FileName>Model\MiBand.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Windows.Devices.Enumeration.DeviceInformation" Collapsed="true">
+    <Position X="21" Y="3.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
