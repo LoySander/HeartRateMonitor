@@ -37,5 +37,7 @@ namespace HeartRateMonitor
             FindWindow z = new FindWindow();
             z.Activate();
         }
+
+  
     }
 }
