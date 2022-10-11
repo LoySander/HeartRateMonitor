@@ -6,15 +6,35 @@
         xmlns:local="clr-namespace:HeartRateMonitor"
         xmlns:viewmodel="clr-namespace:HeartRateMonitor.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:MainVM}"
         mc:Ignorable="d"
-        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:controls="clr-namespace:Windows.UI.Xaml.Controls;assembly=Windows"
         Title="Мониторинг ЧСС" Height="450" Width="800" WindowStyle="ThreeDBorderWindow"
        WindowStartupLocation="CenterScreen">
     <Grid x:Name="MainRoot" Background="GhostWhite">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70"/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0*"/>
-            <ColumnDefinition Width="139*"/>
-            <ColumnDefinition Width="655*"/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
+        <Grid Grid.ColumnSpan="4">
+            <materialDesign:ColorZone
+                Mode="SecondaryMid"
+                Padding="16">
+                <StackPanel Orientation="Horizontal">
+                    <ToggleButton
+                        Style="{StaticResource MaterialDesignHamburgerToggleButton}"/>
+                    <TextBlock 
+                        VerticalAlignment="Center"
+                        Margin="16,0,0,0"
+                        Text="Heart Rate Monitor"/>
+                </StackPanel>
+            </materialDesign:ColorZone>
+        </Grid>
         <Border BorderBrush="Black" Background="#D4BFF9"  BorderThickness="1" HorizontalAlignment="Left" Height="198" Margin="6,11,0,0" VerticalAlignment="Top" Width="748" Grid.Column="1" Grid.ColumnSpan="2" RenderTransformOrigin="0.5,0.5">
             <Border.RenderTransform>
                 <TransformGroup>
