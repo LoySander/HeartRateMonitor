@@ -44,7 +44,7 @@ namespace HeartRateMonitor
     ///     <MyNamespace:NavButton/>
     ///
     /// </summary>
-    public class NavButton : ListBoxItem
+    public class NavButton: ListBox
     {
         static NavButton()
         {
