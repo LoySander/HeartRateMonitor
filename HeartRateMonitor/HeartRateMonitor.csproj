@@ -71,11 +71,40 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Model\HeartRate.cs" />
+    <Compile Include="NavButton.cs" />
     <Compile Include="ViewModel\MessageVM.cs" />
+    <Compile Include="View\ConnectionBLEWindow.xaml.cs">
+      <DependentUpon>ConnectionBLEWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\HeartRateView.xaml.cs">
+      <DependentUpon>HeartRateView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\InformationUserView.xaml.cs">
+      <DependentUpon>InformationUserView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\MyMessageBox.xaml.cs">
       <DependentUpon>MyMessageBox.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\SteamView.xaml.cs">
+      <DependentUpon>SteamView.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Themes\Generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\ConnectionBLEWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\FindWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\HeartRateView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\InformationUserView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -104,6 +133,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="View\MyMessageBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\SteamView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

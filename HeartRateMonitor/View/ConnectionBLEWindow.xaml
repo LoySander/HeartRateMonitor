@@ -1,0 +1,55 @@
+﻿<Page x:Class="HeartRateMonitor.View.ConnectionBLEWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HeartRateMonitor.View"
+        xmlns:viewmodel="clr-namespace:HeartRateMonitor.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:FindVM}"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        Title="ConnectionBLEWindow" Height="450" Width="750">
+    <Grid Background="#f1f3f5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="300"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Grid.Column="2" Text="Connection" FontFamily="ubuntu" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#FFB197FC" FontSize="60" FontWeight="Bold"/>
+        <StackPanel Width="130" Height="35" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,0,0,0">
+            <materialDesign:Badged Badge="Может занять время" BadgeColorZoneMode="Dark">
+                <Button Content="STATUS" IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" />
+            </materialDesign:Badged>
+        </StackPanel>
+        <StackPanel Width="80" Height="32" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,50,0" >
+            <Button Style="{StaticResource MaterialDesignFlatMidBgButton}" ToolTip="MaterialDesignFlatMidButton" Content="MID" 
+             IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" />
+        </StackPanel>
+        <StackPanel Grid.Row="1" Grid.Column="0">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <CheckBox x:Name="FilledComboBoxEnabledCheckBox" IsChecked="True" Margin="0,0,0,8" Content="Enabled" VerticalAlignment="Bottom" />
+                <Button Content="Clear" Style="{StaticResource MaterialDesignFlatButton}" HorizontalAlignment="Right" Grid.Column="1"/>
+            </Grid>
+            <ComboBox x:Name="FilledComboBox" Style="{StaticResource MaterialDesignFilledComboBox}" IsEnabled="{Binding Path=IsChecked, ElementName=FilledComboBoxEnabledCheckBox}" materialDesign:HintAssist.Hint="Some item"
+                    Width="300">
+                <ComboBoxItem Content="Item 1" />
+                <ComboBoxItem Content="Item 2" />
+                <ComboBoxItem Content="Item 3" />
+            </ComboBox>
+        </StackPanel>
+            <StackPanel Grid.Row="1" Grid.Column="1" Margin="5,30">
+                <Expander HorizontalAlignment="Stretch" Header="Описание" >
+                <StackPanel Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" Margin="24,8,24,16">
+                    <TextBlock Text="Your Content"/>
+                </StackPanel>
+                </Expander>
+            </StackPanel>
+    </Grid>
+</Page>

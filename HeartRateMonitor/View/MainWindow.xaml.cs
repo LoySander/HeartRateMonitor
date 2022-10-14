@@ -37,5 +37,17 @@ namespace HeartRateMonitor
             FindWindow z = new FindWindow();
             z.Activate();
         }
+
+        private void sideBar_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var selected = sideBar.SelectedItem as NavButton;
+            navFrame.Navigate(selected.Navlink);
+        }
+
+        private void ListBoxItem_Selected(object sender, RoutedEventArgs e)
+        {
+            var selected = sender as NavButton;
+            navFrame.Navigate(selected.Navlink);
+        }
     }
 }
