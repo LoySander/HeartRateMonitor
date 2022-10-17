@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HeartRateMonitor.Services;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -15,16 +16,26 @@ namespace HeartRateMonitor.Model
     class BLE_Device : INotifyPropertyChanged
     {
         static private DeviceInformation device = null;
+
+        private static BLE_Device instance;
         private DeviceWatcher deviceWatcher = null;
-        public List<DeviceInformation> devices = null;
-        private List<string> names = null;
+        private List<DeviceInformation> devices = null;
+        //private List<string> names = null;
         //public readonly ReadOnlyObservableCollection<DeviceInformation> myPublicDevices;
 
         public BLE_Device()
         {
             devices = new List<DeviceInformation>();
-            names = new List<string>();       
+            //names = new List<string>();       
         }
+
+        public static BLE_Device getInstance()
+        {
+            if (instance == null)
+                instance = new BLE_Device();
+            return instance;
+        }
+
 
         public List<DeviceInformation> Devices
         {
@@ -36,17 +47,18 @@ namespace HeartRateMonitor.Model
             }
 
         }
-        public List<string> Names
-        {
-            get { return names; }
+        //public List<string> Names
+        //{
+        //    get { return names; }
 
-            set
-            {
-                names = value;
-                OnPropertyChanged("Name");
-            }
+        //    set
+        //    {
+        //        names = value;
+        //        OnPropertyChanged("Name");
+        //    }
 
-        }
+        //}
+
         public DeviceInformation Device
         {
             get { return device; }
@@ -59,7 +71,7 @@ namespace HeartRateMonitor.Model
         public void AddDevice(DeviceInformation device)
         {
             devices.Add(device);
-            names.Add(device.Name.ToString());
+            //names.Add(device.Name.ToString());
             // OnPropertyChanged("FindDevice");
         }
         public void FindBLE_Device()
@@ -91,9 +103,10 @@ namespace HeartRateMonitor.Model
                 {
                     Thread.Sleep(200);
                 }
-                else if (names.Contains(device.Name.ToString()) == false || device.Name.ToString() == "Mi Band 3")
-                {                  
-                    AddDevice(device);
+                else if (Devices.Contains(device) == false || device.Name.ToString() == "Mi Band 3")
+                {
+                    //AddDevice(device);
+                    Devices.Add(device);
                     if (device.Name.ToString() == "Mi Band 3")
                     {
                         break;

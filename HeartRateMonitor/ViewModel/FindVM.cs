@@ -70,12 +70,12 @@ namespace HeartRateMonitor.ViewModel
 
         private void GenerateBLE_Devices()
         {
-            device.Names.Clear();
+            //device.Names.Clear();
             device.Devices.Clear();
             device.Device = null;
             Names.Clear();
             device.FindBLE_Device();
-            GetNames();
+           // GetNames();
             GetDevices();
         }
 
@@ -93,15 +93,15 @@ namespace HeartRateMonitor.ViewModel
             }
         }
 
-        public void GetNames()
-        {
-            //var templist = new ObservableCollection<string>();
-            foreach (var item in device.Names)
-            {
-                names.Add(item.ToString());
-            }
-           // return templist;
-        }
+        //public void GetNames()
+        //{
+        //    //var templist = new ObservableCollection<string>();
+        //    foreach (var item in device.Names)
+        //    {
+        //        names.Add(item.ToString());
+        //    }
+        //   // return templist;
+        //}
 
         public ObservableCollection<string> Names
         {

@@ -70,8 +70,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converters\ConverterDeviceInfoToName.cs" />
+    <Compile Include="Model\CollectionEx.cs" />
     <Compile Include="Model\HeartRate.cs" />
     <Compile Include="NavButton.cs" />
+    <Compile Include="ViewModel\ConnectionBLEViewModel.cs" />
     <Compile Include="ViewModel\MessageVM.cs" />
     <Compile Include="View\ConnectionBLEWindow.xaml.cs">
       <DependentUpon>ConnectionBLEWindow.xaml</DependentUpon>

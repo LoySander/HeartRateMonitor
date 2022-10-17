@@ -16,12 +16,7 @@ namespace HeartRateMonitor.ViewModel
   
     class MainVM : INotifyPropertyChanged
     { 
-        private RelayCommand openFindViewCommand;
-        private RelayCommand startСommand;
-        private RelayCommand disconnectCommand;
-        private RelayCommand stopCommand;
-        private RelayCommand setNormHeartRate;
-        private RelayCommand cancelNormHeartRate;
+        
         private WindowService showService;
         private OurDeviceInformation device;
         private string _selectedDevice;
@@ -50,6 +45,15 @@ namespace HeartRateMonitor.ViewModel
                 OnPropertyChanged(nameof(HeartRate));
             }
         }
+
+        #region command
+        private RelayCommand openFindViewCommand;
+        private RelayCommand startСommand;
+        private RelayCommand disconnectCommand;
+        private RelayCommand stopCommand;
+        private RelayCommand setNormHeartRate;
+        private RelayCommand cancelNormHeartRate;
+
         public RelayCommand OpenFindViewCommand
         {
             get
@@ -136,6 +140,7 @@ namespace HeartRateMonitor.ViewModel
                     }));
             }
         }
+        #endregion c
         public void ShowFindView()
         {
             FindVM vm = new FindVM(this.device,this.showService);
