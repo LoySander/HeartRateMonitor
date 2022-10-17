@@ -17,7 +17,6 @@ namespace HeartRateMonitor.ViewModel
     class MainVM : INotifyPropertyChanged
     { 
         
-        private WindowService showService;
         private OurDeviceInformation device;
         private string _selectedDevice;
         private MiBand authenticate;
@@ -31,7 +30,6 @@ namespace HeartRateMonitor.ViewModel
         
         public MainVM()
         {
-           showService = new WindowService();
            device = OurDeviceInformation.getInstance();
            authenticate = new MiBand();
            connection = ConnectionToBLE.getInstance();
@@ -61,7 +59,7 @@ namespace HeartRateMonitor.ViewModel
                 return openFindViewCommand ??
                     (openFindViewCommand = new RelayCommand(obj =>
                     {
-                        ShowFindView();
+                        //ShowFindView();
                     }));
             }
         }
@@ -75,7 +73,7 @@ namespace HeartRateMonitor.ViewModel
                         heartRate.StopHeartRate();
                         connection.Disconnect(device.Device);
                         Thread.Sleep(200);
-                        showService.ShowMessageBox(connection.GetBluetoothLE().ConnectionStatus.ToString());
+                        //showService.ShowMessageBox(connection.GetBluetoothLE().ConnectionStatus.ToString());
                     }));
             }
         }
@@ -113,7 +111,7 @@ namespace HeartRateMonitor.ViewModel
                     (stopCommand = new RelayCommand(obj =>
                     {
                         heartRate.StopHeartRate();
-                        showService.ShowMessageBox("Stopping");
+                        //showService.ShowMessageBox("Stopping");
                     }));
             }
         }
@@ -141,11 +139,7 @@ namespace HeartRateMonitor.ViewModel
             }
         }
         #endregion c
-        public void ShowFindView()
-        {
-            FindVM vm = new FindVM(this.device,this.showService);
-            showService.ShowOrOpen(0, vm, true);     
-        }
+       
         public string SelectedDevice
         {
             get { return _selectedDevice; }
@@ -168,7 +162,7 @@ namespace HeartRateMonitor.ViewModel
             get { return isSafeData; }
             set { isSafeData = value;
                 OnPropertyChanged(nameof(IsSafeData));
-                showService.ShowMessageBox("Хорошо, данные будут записываться в файл");
+               // showService.ShowMessageBox("Хорошо, данные будут записываться в файл");
             }
         }
         
@@ -178,7 +172,7 @@ namespace HeartRateMonitor.ViewModel
             set {
                 isSound = value;
                 OnPropertyChanged(nameof(IsSound));
-                showService.ShowMessageBox("Хорошо, вы включили звуковое оповещение");
+               // showService.ShowMessageBox("Хорошо, вы включили звуковое оповещение");
             }
         }
 

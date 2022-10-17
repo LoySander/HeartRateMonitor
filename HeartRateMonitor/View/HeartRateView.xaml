@@ -6,6 +6,7 @@
       xmlns:local="clr-namespace:HeartRateMonitor.View"
       mc:Ignorable="d"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:viewmodel="clr-namespace:HeartRateMonitor.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:MainVM}"
       d:DesignHeight="450" d:DesignWidth="750"
       Title="HeartRateView">
 
@@ -31,12 +32,12 @@
                         </StackPanel>
                     </DataTemplate>
                 </GroupBox.HeaderTemplate>
-                <TextBlock Height="100" />
+                <TextBlock Height="100" Width="100" Text="{Binding HeartRate.HeartRateLevel}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             </GroupBox>
         </StackPanel>
         <Button Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" Width="150"  Style="{StaticResource MaterialDesignFlatMidBgButton}" ToolTip="MaterialDesignFlatMidButton" Content="Старт" 
-             IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" />
+             Command="{Binding StartСommand}" IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" Cursor="Hand" />
         <Button Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Width="150"  Style="{StaticResource MaterialDesignFlatMidBgButton}" ToolTip="MaterialDesignFlatMidButton" Content="Стоп" 
-             IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" />
+             Command="{Binding StopCommand}" IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" />
     </Grid>
 </Page>

@@ -16,12 +16,12 @@ namespace HeartRateMonitor.Model
     class BLE_Device : INotifyPropertyChanged
     {
         static private DeviceInformation device = null;
-
         private static BLE_Device instance;
         private DeviceWatcher deviceWatcher = null;
         private List<DeviceInformation> devices = null;
+
+        public event PropertyChangedEventHandler PropertyChanged;
         //private List<string> names = null;
-        //public readonly ReadOnlyObservableCollection<DeviceInformation> myPublicDevices;
 
         public BLE_Device()
         {
@@ -145,7 +145,7 @@ namespace HeartRateMonitor.Model
             }
         }
 
-    public event PropertyChangedEventHandler PropertyChanged;
+        
         public void OnPropertyChanged([CallerMemberName]string prop = "")
         {
             if(PropertyChanged != null)

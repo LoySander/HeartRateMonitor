@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using HeartRateMonitor.ViewModel;
 
 namespace HeartRateMonitor.View
 {
@@ -21,7 +22,9 @@ namespace HeartRateMonitor.View
     {
         public ConnectionBLEWindow()
         {
+
             InitializeComponent();
+            DataContext = new ConnectionBLEViewModel();
         }
     }
 }
