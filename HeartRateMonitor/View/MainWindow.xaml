@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:controls="clr-namespace:Windows.UI.Xaml.Controls;assembly=Windows"
         Title="Мониторинг ЧСС" Height="450" Width="800" 
-       WindowStartupLocation="CenterScreen" SnapsToDevicePixels="True" ResizeMode="NoResize">
+       WindowStartupLocation="CenterScreen" SnapsToDevicePixels="True" ResizeMode="NoResize" Cursor="Hand">
     <Grid>
         <!--<Grid.RowDefinitions>
             <RowDefinition Height="70"/>
