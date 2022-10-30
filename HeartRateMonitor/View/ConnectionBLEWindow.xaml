@@ -39,7 +39,7 @@
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
                 <CheckBox x:Name="FilledComboBoxEnabledCheckBox" IsChecked="True" Margin="0,0,0,8" Content="Enabled" VerticalAlignment="Bottom" />
-                <Button Content="Clear" Style="{StaticResource MaterialDesignFlatButton}" HorizontalAlignment="Right" Grid.Column="1"/>
+                <Button Content="Очистить" Style="{StaticResource MaterialDesignFlatButton}" HorizontalAlignment="Right" Grid.Column="1"/>
             </Grid>
             <ComboBox x:Name="FilledComboBox" Style="{StaticResource MaterialDesignFilledComboBox}" IsEnabled="{Binding Path=IsChecked, ElementName=FilledComboBoxEnabledCheckBox}" materialDesign:HintAssist.Hint="Some item"
                     Width="300" ItemsSource="{Binding Devices}" SelectedItem="{Binding Device}">
