@@ -25,12 +25,12 @@
         <TextBlock Grid.Column="2" Text="Connection" FontFamily="ubuntu" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#FFB197FC" FontSize="60" FontWeight="Bold"/>
         <StackPanel Width="130" Height="35" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,0,0,0">
             <materialDesign:Badged Badge="Может занять время" BadgeColorZoneMode="Dark">
-                <Button Content="ПОИСК" IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Cursor="Hand" />
+                <Button Content="ПОИСК" Command="{Binding FindCommand}" IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Cursor="Hand" />
             </materialDesign:Badged>
         </StackPanel>
         <StackPanel Width="140" Height="32" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="150,0,0,0" >
             <Button Style="{StaticResource MaterialDesignFlatMidBgButton}" ToolTip="MaterialDesignFlatMidButton" Content="ПОДКЛЮЧЕНИЕ" 
-             IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" />
+             IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" Command="{Binding ConnectCommand}" Cursor="Hand" />
         </StackPanel>
         <StackPanel Grid.Row="1" Grid.Column="0">
             <Grid>
