@@ -24,7 +24,7 @@ namespace HeartRateMonitor
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = new MainVM();
+            
         }
     
         private void MessageButton_Click(object sender, RoutedEventArgs e)
