@@ -22,6 +22,7 @@ namespace HeartRateMonitor.ViewModel
         private ConnectionToBLE _connectionToBLE;
         private MessageBoxService _messageBox;
         private WindowService _showService;
+        private MiBand _authenticate;
         public event PropertyChangedEventHandler PropertyChanged;
 
         public ConnectionBLEViewModel()
@@ -31,6 +32,8 @@ namespace HeartRateMonitor.ViewModel
             _messageBox = new MessageBoxService();
             Devices = new ObservableCollection<DeviceInformation>();
             _showService = new WindowService();
+            _messageBox = new MessageBoxService();
+            _authenticate = new MiBand();
         }
 
         #region command
@@ -102,11 +105,12 @@ namespace HeartRateMonitor.ViewModel
 
         private async void ConnectToBLEDevice()
         {
-            if(Device != null)
+        
+            if (Device != null)
             {
-               await _connectionToBLE.ConnectAsync(Device);
+                await _connectionToBLE.ConnectAsync(Device);
                 _showService.ShowMessageBox(_connectionToBLE.GetBluetoothLE().ConnectionStatus.ToString());
-                //_messageBox.ShowOrOpen(0,this,true);
+                await _authenticate.AuthenticateAsync(_connectionToBLE.GetBluetoothLE());
             }
             else
             {
