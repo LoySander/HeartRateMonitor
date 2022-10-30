@@ -15,7 +15,7 @@
         </Grid.ColumnDefinitions>
         <TextBlock Text="Точно ли хотите подключится к устройству?" HorizontalAlignment="Left" Margin="19,9,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="43" Width="372" FontSize="18" Grid.ColumnSpan="3"/>
         <Button Content="Да" Command="{Binding YesCommand}" HorizontalAlignment="Left" Margin="189.6,127,0,0" VerticalAlignment="Top" Width="116" Height="37" RenderTransformOrigin="0.519,-0.067" Grid.Column="2"/>
-        <Button Content="Отмена" Command="{Binding CancelCommand}" HorizontalAlignment="Left" Margin="339.6,127,0,0" VerticalAlignment="Top" Width="116" Height="37" RenderTransformOrigin="0.519,-0.067" Grid.Column="2"/>
+        <Button Content="Отмена" Command="{Binding CancelCommand}" HorizontalAlignment="Left" Margin="339.6,127,0,0" VerticalAlignment="Top" Width="116" Height="37" RenderTransformOrigin="0.519,-0.067" Grid.Column="2" Cursor="Hand"/>
 
     </Grid>
 </Window>

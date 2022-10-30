@@ -56,7 +56,7 @@ namespace HeartRateMonitor.ViewModel
                 return cancelCommand ??
                     (cancelCommand = new RelayCommand(obj =>
                     {
-                        connection.Disconnect(device.Device);
+                        //connection.Disconnect(device.Device);
                         messageBoxService.ShowOrOpen(1, this, false);
                     }));
             }
