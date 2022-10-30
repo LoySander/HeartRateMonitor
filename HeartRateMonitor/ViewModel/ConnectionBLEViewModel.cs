@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Data.Common;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -20,6 +21,7 @@ namespace HeartRateMonitor.ViewModel
         private DeviceInformation _device;
         private ConnectionToBLE _connectionToBLE;
         private MessageBoxService _messageBox;
+        private WindowService _showService;
         public event PropertyChangedEventHandler PropertyChanged;
 
         public ConnectionBLEViewModel()
@@ -28,11 +30,13 @@ namespace HeartRateMonitor.ViewModel
             _connectionToBLE = ConnectionToBLE.getInstance();
             _messageBox = new MessageBoxService();
             Devices = new ObservableCollection<DeviceInformation>();
+            _showService = new WindowService();
         }
 
         #region command
         private RelayCommand _findCommand;
         private RelayCommand _connectCommand;
+        private RelayCommand _clearListCommand;
 
         public RelayCommand FindCommand
         {
@@ -56,6 +60,19 @@ namespace HeartRateMonitor.ViewModel
                     (_connectCommand = new RelayCommand(obj =>
                     {
                         ConnectToBLEDevice();
+                    }));
+            }
+        }
+
+        public RelayCommand ClearListCommand
+        {
+            get
+            {
+                return _clearListCommand ??
+                    (_clearListCommand = new RelayCommand(obj =>
+                    {
+                        _deviceBLE.ClearListDevice();
+                        Devices.Clear();
                     }));
             }
         }
@@ -88,7 +105,8 @@ namespace HeartRateMonitor.ViewModel
             if(Device != null)
             {
                await _connectionToBLE.ConnectAsync(Device);
-                _messageBox.ShowOrOpen(0,this,true);
+                _showService.ShowMessageBox(_connectionToBLE.GetBluetoothLE().ConnectionStatus.ToString());
+                //_messageBox.ShowOrOpen(0,this,true);
             }
             else
             {

@@ -116,6 +116,11 @@ namespace HeartRateMonitor.Model
 
             deviceWatcher.Stop();
         }
+
+        public void ClearListDevice()
+        {
+            Devices.Clear();
+        }
         private static void DeviceWatcher_Stopped(DeviceWatcher sender, object args)
         {
             //throw new NotImplementedException();
