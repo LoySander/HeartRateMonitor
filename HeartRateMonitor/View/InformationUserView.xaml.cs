@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HeartRateMonitor.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,7 @@ namespace HeartRateMonitor.View
         public InformationUserView()
         {
             InitializeComponent();
+            DataContext = new UserVM();
         }
     }
 }

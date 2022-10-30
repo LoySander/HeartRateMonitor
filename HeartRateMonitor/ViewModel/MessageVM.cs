@@ -44,7 +44,7 @@ namespace HeartRateMonitor.ViewModel
                     (yesCommand = new RelayCommand(async obj =>
                     {
                         await authenticate.AuthenticateAsync(connection.GetBluetoothLE());
-                        windowService.ShowOrOpen(1, this, false);
+                        //windowService.ShowOrOpen(1, this, false);
                         messageBoxService.ShowOrOpen(1, this, false);
                     }));
             }

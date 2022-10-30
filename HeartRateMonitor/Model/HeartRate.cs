@@ -32,6 +32,8 @@ namespace HeartRateMonitor.Model
         GattCharacteristic _heartrateCharacteristic = null;
         GattCharacteristic _heartrateNotifyCharacteristic = null;
         GattDeviceService _sensorService = null;
+       
+        private static HeartRate instance;
 
         private string _heartRate;
         public event PropertyChangedEventHandler PropertyChanged;
@@ -42,6 +44,13 @@ namespace HeartRateMonitor.Model
         private bool isSound = false;
         private MediaPlayer player;
         private int norm = 0;
+
+        public static HeartRate getInstance()
+        {
+            if (instance == null)
+                instance = new HeartRate();
+            return instance;
+        }
        
         public HeartRate()
         {
