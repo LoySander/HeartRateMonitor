@@ -32,8 +32,8 @@
                         <materialDesign:PackIcon Kind="AccountCircle" Height="128" Width="128" VerticalAlignment="Center" HorizontalAlignment="Center" />
                     </materialDesign:ColorZone>
                     <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
-                        <TextBlock Text="James Willock" />
-                        <Button Style="{StaticResource MaterialDesignFlatButton}" Command="{x:Static materialDesign:Flipper.FlipCommand}" Margin="0 4 0 0" Content="EDIT" />
+                        <TextBlock Text="Пользователь" HorizontalAlignment="Center" />
+                        <Button Style="{StaticResource MaterialDesignFlatButton}" Command="{x:Static materialDesign:Flipper.FlipCommand}" Margin="0 4 0 0" Content="Редактировать" />
                     </StackPanel>
                 </Grid>
             </materialDesign:Flipper.FrontContent>

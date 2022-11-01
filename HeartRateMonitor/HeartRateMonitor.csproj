@@ -80,6 +80,7 @@
     <Compile Include="NavButton.cs" />
     <Compile Include="ViewModel\ConnectionBLEViewModel.cs" />
     <Compile Include="ViewModel\MessageVM.cs" />
+    <Compile Include="ViewModel\SteamVM.cs" />
     <Compile Include="ViewModel\UserVM.cs" />
     <Compile Include="View\ConnectionBLEWindow.xaml.cs">
       <DependentUpon>ConnectionBLEWindow.xaml</DependentUpon>
