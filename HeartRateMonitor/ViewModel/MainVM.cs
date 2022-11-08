@@ -26,8 +26,6 @@ namespace HeartRateMonitor.ViewModel
         private bool isSafeData;
         private bool isSound;
        
-       
-        
         public MainVM()
         {
            device = OurDeviceInformation.getInstance();
@@ -61,6 +59,7 @@ namespace HeartRateMonitor.ViewModel
                     }));
             }
         }
+
         public RelayCommand DisconnectCommand
         {
             get
@@ -101,6 +100,7 @@ namespace HeartRateMonitor.ViewModel
                     }));
             }
         }
+
         public RelayCommand StopCommand
         {
             get
@@ -112,8 +112,7 @@ namespace HeartRateMonitor.ViewModel
                         //showService.ShowMessageBox("Stopping");
                     }));
             }
-        }
-        
+        } 
         #endregion 
        
         public string SelectedDevice
@@ -151,7 +150,5 @@ namespace HeartRateMonitor.ViewModel
                // showService.ShowMessageBox("Хорошо, вы включили звуковое оповещение");
             }
         }
-
-
     }
 }

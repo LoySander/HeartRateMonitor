@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Runtime.Serialization.Json;
+using System.Collections.ObjectModel;
 
 namespace HeartRateMonitor.Model
 {
@@ -18,6 +19,7 @@ namespace HeartRateMonitor.Model
                "&format=json&include_appinfo=1";
         private HttpWebRequest _httpWebRequest;
         private HttpWebResponse _httpWebResponse;
+        private ICollection<Game> gamesList = new List<Game>();
 
         public static string Key { get; set; } = null;
         public static string ID { get; set; } = null;
@@ -39,9 +41,18 @@ namespace HeartRateMonitor.Model
             {
                 response = streamReader.ReadToEnd();
             }
-            var results = JsonConvert.DeserializeObject<GameResponse>(response);
+            var results = JsonConvert.DeserializeObject<GameResponse>(response);    
+            GamesList = results.Response.Games;
             return results;
         }
+
+        public ICollection<Game> GamesList
+        {
+            get => gamesList;
+            set => gamesList = value;
+        }
+
+        
     }
 
         #region вспомогательные классы

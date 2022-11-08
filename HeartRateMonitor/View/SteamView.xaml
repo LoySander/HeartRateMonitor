@@ -4,10 +4,14 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:HeartRateMonitor.View" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:viewmodel="clr-namespace:HeartRateMonitor.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:SteamVM}"
+      xmlns:converters="clr-namespace:HeartRateMonitor.Converters"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="750"
       Title="SteamView">
-
+    <Page.Resources>
+        <converters:ConverterGameToName x:Key="GameToName"/>
+    </Page.Resources>
     <Grid Background="#2a475e">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -17,6 +21,22 @@
             <RowDefinition Height="100"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
+
+        <Button Grid.Column="1" Grid.Row="1" Content="Поиск" Width="82" Height="25" Margin="48,40,420,285" Cursor="Hand" Background="White" Foreground="#c7d5e0" Command="{Binding FindCommand}"/>
+        <ComboBox Grid.Column="1" Grid.Row="1" materialDesign:HintAssist.Hint="Search" materialDesign:HintAssist.HintOpacity=".26" IsEditable="True" Margin="199,40,40,0" 
+                      Background="#c7d5e0" VerticalAlignment="Top" Width="311">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Converter={StaticResource GameToName}}"/>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+
+        <WrapPanel  Grid.Row="1" Grid.Column="1" Margin="0,292,0,0" >
+            <Button Margin="50,10,10,10"  Width="120" Background="White" Foreground="#c7d5e0" Content="Запустить"/>
+            <Button Margin="50,10,10,10"  Width="120" Background="White" Foreground="#c7d5e0" Content="Выключить"/>
+        </WrapPanel>
+
         <StackPanel Grid.ColumnSpan="2" Orientation="Horizontal" Background="#1b2838">
             <Path Stretch="Fill" Margin="40,10,10,10" Width="100" VerticalAlignment="Top"  Height="75" Fill="#c7d5e0 " Data="M7.97,16L5,19C4.67,19.3 4.23,19.5 3.75,19.5A1.75,1.75 0 0,1 2,17.75V17.5L3,10.12C3.21,7.81 5.14,6 7.5,6H16.5C18.86,6 20.79,7.81 21,10.12L22,17.5V17.75A1.75,1.75 0 0,1 20.25,19.5C19.77,19.5 19.33,19.3 19,19L16.03,16H7.97M7,8V10H5V11H7V13H8V11H10V10H8V8H7M16.5,8A0.75,0.75 0 0,0 15.75,8.75A0.75,0.75 0 0,0 16.5,9.5A0.75,0.75 0 0,0 17.25,8.75A0.75,0.75 0 0,0 16.5,8M14.75,9.75A0.75,0.75 0 0,0 14,10.5A0.75,0.75 0 0,0 14.75,11.25A0.75,0.75 0 0,0 15.5,10.5A0.75,0.75 0 0,0 14.75,9.75M18.25,9.75A0.75,0.75 0 0,0 17.5,10.5A0.75,0.75 0 0,0 18.25,11.25A0.75,0.75 0 0,0 19,10.5A0.75,0.75 0 0,0 18.25,9.75M16.5,11.5A0.75,0.75 0 0,0 15.75,12.25A0.75,0.75 0 0,0 16.5,13A0.75,0.75 0 0,0 17.25,12.25A0.75,0.75 0 0,0 16.5,11.5Z" />
             <TextBlock Style="{StaticResource MaterialDesignHeadline3TextBlock}" Foreground="#c7d5e0" Margin="100,10,10,10"  VerticalAlignment="Center" Text="Game Studio"/>
@@ -49,7 +69,7 @@
                                     HorizontalAlignment="Left">
                                 <materialDesign:PackIcon Kind="ArrowLeft" HorizontalAlignment="Right" />
                             </Button>
-                            <TextBlock Margin="8 0 0 0" VerticalAlignment="Center" Text="EDIT USER" />
+                            <TextBlock Margin="8 0 0 0" VerticalAlignment="Center" Text="Обратно" />
                         </StackPanel>
                     </materialDesign:ColorZone>
                     <Grid Grid.Row="1" Margin="0 6 0 0" HorizontalAlignment="Center" VerticalAlignment="Top" Width="172">
@@ -59,15 +79,10 @@
                             <RowDefinition />
                             <RowDefinition />
                         </Grid.RowDefinitions>
-                        <TextBox materialDesign:HintAssist.Hint="First name" materialDesign:HintAssist.IsFloating="True" Margin="0 12 0 0" Text="James" />
-                        <TextBox Grid.Row="1" materialDesign:HintAssist.Hint="Last name" materialDesign:HintAssist.IsFloating="True" Margin="0 12 0 0" Text="Willock" />
+                        <TextBox materialDesign:HintAssist.Hint="Ключ" materialDesign:HintAssist.IsFloating="True" Margin="0 12 0 0" Text="{Binding Key}" />
+                        <TextBox Grid.Row="1" materialDesign:HintAssist.Hint="Стим ID" materialDesign:HintAssist.IsFloating="True" Margin="0 12 0 0" Text="{Binding ID}" />
                         <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0 12 0 0" HorizontalAlignment="Right">
-                            <TextBlock VerticalAlignment="Center" Text="Email Contact" />
-                            <ToggleButton Margin="8 0 0 0" />
-                        </StackPanel>
-                        <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="0 12 0 0" HorizontalAlignment="Right">
-                            <TextBlock VerticalAlignment="Center" Text="Telephone Contact" />
-                            <ToggleButton Margin="8 0 0 0" />
+                            <Button Margin="8 0 0 0" Content="ВВОД" Cursor="Hand" />
                         </StackPanel>
                     </Grid>
                 </Grid>

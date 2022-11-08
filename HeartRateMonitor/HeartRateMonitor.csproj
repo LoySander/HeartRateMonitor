@@ -74,6 +74,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Converters\ConverterDeviceInfoToName.cs" />
+    <Compile Include="Converters\ConverterGameToName.cs" />
     <Compile Include="Model\CollectionEx.cs" />
     <Compile Include="Model\HeartRate.cs" />
     <Compile Include="Model\SteamData.cs" />
