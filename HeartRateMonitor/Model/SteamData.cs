@@ -15,8 +15,6 @@ namespace HeartRateMonitor.Model
     class SteamData
     {
         private static SteamData instance;
-        string apiURL = "http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=" + Key + "&steamid=" + ID +
-               "&format=json&include_appinfo=1";
         private HttpWebRequest _httpWebRequest;
         private HttpWebResponse _httpWebResponse;
         private ICollection<Game> gamesList = new List<Game>();
@@ -33,6 +31,8 @@ namespace HeartRateMonitor.Model
 
         public GameResponse GetGames()
         {
+            string apiURL = "http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=" + Key + "&steamid=" + ID +
+           "&format=json&include_appinfo=1";
             string response;
             _httpWebRequest = (HttpWebRequest)WebRequest.Create(apiURL);
             _httpWebResponse = (HttpWebResponse)_httpWebRequest.GetResponse();

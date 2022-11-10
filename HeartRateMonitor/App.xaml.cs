@@ -1,4 +1,6 @@
-﻿using System;
+﻿using HeartRateMonitor.Services;
+using HeartRateMonitor.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -13,5 +15,17 @@ namespace HeartRateMonitor
     /// </summary>
     public partial class App : Application
     {
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            base.OnStartup(e);
+            IocContainer.Register<HeartRateVM>();
+            IocContainer.Register<ConnectionBLEViewModel>();
+            IocContainer.Register<SteamVM>();
+            IocContainer.Register<UserVM>();
+            IocContainer.Register<MainVM>();
+
+            IocContainer.Resolve<MainWindow>().Show();
+        }
+
     }
 }

@@ -19,12 +19,12 @@ namespace HeartRateMonitor
     /// <summary>
     /// Логика взаимодействия для MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public sealed partial class MainWindow : Window
     {
-        public MainWindow()
+        public MainWindow(MainVM mainVM)
         {
             InitializeComponent();
-            
+            DataContext = mainVM;
         }
     
         private void MessageButton_Click(object sender, RoutedEventArgs e)
@@ -38,16 +38,16 @@ namespace HeartRateMonitor
             z.Activate();
         }
 
-        private void sideBar_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            var selected = sideBar.SelectedItem as NavButton;
-            navFrame.Navigate(selected.Navlink);
-        }
+        //private void sideBar_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        //{
+        //    var selected = sideBar.SelectedItem as NavButton;
+        //    navFrame.Navigate(selected.Navlink);
+        //}
 
-        private void ListBoxItem_Selected(object sender, RoutedEventArgs e)
-        {
-            var selected = sender as NavButton;
-            navFrame.Navigate(selected.Navlink);
-        }
+        //private void ListBoxItem_Selected(object sender, RoutedEventArgs e)
+        //{
+        //    var selected = sender as NavButton;
+        //    navFrame.Navigate(selected.Navlink);
+        //}
     }
 }

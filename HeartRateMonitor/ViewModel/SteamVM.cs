@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace HeartRateMonitor.ViewModel {
-    class SteamVM: INotifyPropertyChanged {
+    public class SteamVM: INotifyPropertyChanged {
         public event PropertyChangedEventHandler PropertyChanged;
         private string _key;
         private string _id;

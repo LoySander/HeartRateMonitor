@@ -21,10 +21,8 @@
             <RowDefinition Height="100"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-
-        <Button Grid.Column="1" Grid.Row="1" Content="Поиск" Width="82" Height="25" Margin="48,40,420,285" Cursor="Hand" Background="White" Foreground="#c7d5e0" Command="{Binding FindCommand}"/>
         <ComboBox Grid.Column="1" Grid.Row="1" materialDesign:HintAssist.Hint="Search" materialDesign:HintAssist.HintOpacity=".26" IsEditable="True" Margin="199,40,40,0" 
-                      Background="#c7d5e0" VerticalAlignment="Top" Width="311">
+                      Background="#c7d5e0" VerticalAlignment="Top" Width="311" ItemsSource="{Binding Games}">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding Converter={StaticResource GameToName}}"/>
@@ -32,8 +30,8 @@
             </ComboBox.ItemTemplate>
         </ComboBox>
 
-        <WrapPanel  Grid.Row="1" Grid.Column="1" Margin="0,292,0,0" >
-            <Button Margin="50,10,10,10"  Width="120" Background="White" Foreground="#c7d5e0" Content="Запустить"/>
+        <WrapPanel  Grid.Row="1" Grid.Column="1" VerticalAlignment="Bottom" >
+            <Button Margin="50,10,10,10"  Width="120" Background="White" Foreground="#c7d5e0" Content="Запустить" Cursor="Hand"/>
             <Button Margin="50,10,10,10"  Width="120" Background="White" Foreground="#c7d5e0" Content="Выключить"/>
         </WrapPanel>
 
@@ -82,11 +80,12 @@
                         <TextBox materialDesign:HintAssist.Hint="Ключ" materialDesign:HintAssist.IsFloating="True" Margin="0 12 0 0" Text="{Binding Key}" />
                         <TextBox Grid.Row="1" materialDesign:HintAssist.Hint="Стим ID" materialDesign:HintAssist.IsFloating="True" Margin="0 12 0 0" Text="{Binding ID}" />
                         <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0 12 0 0" HorizontalAlignment="Right">
-                            <Button Margin="8 0 0 0" Content="ВВОД" Cursor="Hand" />
+                            <Button Margin="8 0 0 0" Content="ВВОД" Cursor="Hand" Command="{Binding EnterCommand}" />
                         </StackPanel>
                     </Grid>
                 </Grid>
             </materialDesign:Flipper.BackContent>
         </materialDesign:Flipper>
+        <Button Grid.Column="1" Grid.Row="1" Content="Поиск" Width="82" Height="25"  Cursor="Hand" Background="White" Foreground="#c7d5e0" Command="{Binding FindCommand}" VerticalAlignment="Top"  HorizontalAlignment="Right"/>
     </Grid>
 </Page>

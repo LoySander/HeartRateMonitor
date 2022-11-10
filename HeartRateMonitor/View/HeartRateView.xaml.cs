@@ -1,4 +1,5 @@
-﻿using HeartRateMonitor.ViewModel;
+﻿using HeartRateMonitor.Interfaces;
+using HeartRateMonitor.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,12 +20,12 @@ namespace HeartRateMonitor.View
     /// <summary>
     /// Логика взаимодействия для HeartRateView.xaml
     /// </summary>
-    public partial class HeartRateView : Page
+    public partial class HeartRateView : Page,IView
     {
-        public HeartRateView()
+        public HeartRateView(HeartRateVM heartRateVM)
         {
             InitializeComponent();
-            DataContext = new MainVM();
+            DataContext = heartRateVM;
         }
     }
 }

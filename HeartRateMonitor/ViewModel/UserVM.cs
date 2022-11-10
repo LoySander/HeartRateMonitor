@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace HeartRateMonitor.ViewModel
 {
-    class UserVM: INotifyPropertyChanged
+    public class UserVM: INotifyPropertyChanged
     {
         private string _age;
         private string _heartRateSimple;

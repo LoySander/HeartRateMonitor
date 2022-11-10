@@ -14,7 +14,7 @@ using Windows.Devices.Enumeration;
 
 namespace HeartRateMonitor.ViewModel
 {
-    class ConnectionBLEViewModel:INotifyPropertyChanged
+    public class ConnectionBLEViewModel:INotifyPropertyChanged
     {
         private BLE_Device _deviceBLE;
         private ObservableCollection<DeviceInformation> _devices;

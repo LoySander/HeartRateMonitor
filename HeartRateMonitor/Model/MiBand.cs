@@ -11,7 +11,7 @@ using Windows.Storage.Streams;
 
 namespace HeartRateMonitor.Model
 {
-    class MiBand
+    public class MiBand
     {
         const string AUTH_SRV_ID = "0000fee1-0000-1000-8000-00805f9b34fb";
         const string AUTH_CHAR_ID = "00000009-0000-3512-2118-0009af100700";

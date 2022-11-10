@@ -1,4 +1,6 @@
-﻿using System;
+﻿using HeartRateMonitor.Interfaces;
+using HeartRateMonitor.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,11 +20,12 @@ namespace HeartRateMonitor.View
     /// <summary>
     /// Логика взаимодействия для SteamView.xaml
     /// </summary>
-    public partial class SteamView : Page
+    public partial class SteamView : Page, IView
     {
-        public SteamView()
+        public SteamView(SteamVM steamVM)
         {
             InitializeComponent();
+            DataContext = steamVM;
         }
     }
 }

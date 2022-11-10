@@ -17,7 +17,7 @@ using Windows.Storage.Streams;
 
 namespace HeartRateMonitor.Model
 {
-    class HeartRate : MiBand,INotifyPropertyChanged
+    public class HeartRate : MiBand,INotifyPropertyChanged
     {
         const string HEARTRATE_SRV_ID = "0000180d-0000-1000-8000-00805f9b34fb";
         const string HEARTRATE_CHAR_ID = "00002a39-0000-1000-8000-00805f9b34fb";

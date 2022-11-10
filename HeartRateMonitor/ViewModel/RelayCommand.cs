@@ -7,7 +7,7 @@ using System.Windows.Input;
 
 namespace HeartRateMonitor.ViewModel
 {
-    class RelayCommand : ICommand
+    public class RelayCommand : ICommand
     {
 
         private Action<object> execute;
