@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -15,9 +16,15 @@ namespace HeartRateMonitor.ViewModel {
         private string _id;
         private SteamData _steamData;
         private ObservableCollection<Game> _games;
+        private Game _selectedGame;
+        private ProcessStartInfo _procInfo;
+        private Process _process;
 
         public SteamVM() {
             _steamData = SteamData.getInstance();
+            _procInfo = new ProcessStartInfo();
+            _procInfo.FileName = @"D:\Steam\steam.exe";
+            _process = new Process();
         }
 
         #region свойства
@@ -46,11 +53,23 @@ namespace HeartRateMonitor.ViewModel {
                 OnPropertyChanged();
             }
         }
+
+        public Game SelectedGame
+        {
+            get => _selectedGame;
+            set
+            {
+                _selectedGame = value;
+                OnPropertyChanged();
+            }
+        }
         #endregion
 
         #region комманды
         private RelayCommand _enterCommand;
         private RelayCommand _findCommand;
+        private RelayCommand _startGameCommand;
+        private RelayCommand _exitGameCommand;
 
         public RelayCommand EnterCommand
         {
@@ -77,6 +96,38 @@ namespace HeartRateMonitor.ViewModel {
                        }));
             }
         }
+
+        public RelayCommand StartGameCommand
+        {
+            get
+            {
+                return _startGameCommand ??
+                       (_startGameCommand = new RelayCommand(obj =>
+                       {
+                           if (_selectedGame != null)
+                           {
+                               _procInfo.Arguments = $"steam://rungameid/{_selectedGame.Appid}";
+                               _process.StartInfo = _procInfo;
+                               _process.Start();
+                           }
+                           throw new ArgumentException("Error");
+                       }));
+            }
+        }
+
+        public RelayCommand ExitGameCommand
+        {
+            get
+            {
+                return _exitGameCommand ??
+                       (_exitGameCommand = new RelayCommand(obj =>
+                       {
+                           _process.Kill();
+                           _process.Close();
+                       }));
+            }
+        }
+
 
         #endregion
 

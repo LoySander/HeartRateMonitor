@@ -22,7 +22,7 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <ComboBox Grid.Column="1" Grid.Row="1" materialDesign:HintAssist.Hint="Search" materialDesign:HintAssist.HintOpacity=".26" IsEditable="True" Margin="199,40,40,0" 
-                      Background="#c7d5e0" VerticalAlignment="Top" Width="311" ItemsSource="{Binding Games}">
+                      Background="#c7d5e0" VerticalAlignment="Top" Width="311" ItemsSource="{Binding Games}" SelectedItem="{Binding SelectedGame}">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding Converter={StaticResource GameToName}}"/>
@@ -31,8 +31,8 @@
         </ComboBox>
 
         <WrapPanel  Grid.Row="1" Grid.Column="1" VerticalAlignment="Bottom" >
-            <Button Margin="50,10,10,10"  Width="120" Background="White" Foreground="#c7d5e0" Content="Запустить" Cursor="Hand"/>
-            <Button Margin="50,10,10,10"  Width="120" Background="White" Foreground="#c7d5e0" Content="Выключить"/>
+            <Button Margin="50,10,10,10"  Width="120" Background="White" Foreground="#c7d5e0" Content="Запустить" Command="{Binding StartGameCommand}" Cursor="Hand"/>
+            <Button Margin="50,10,10,10"  Width="120" Background="White" Foreground="#c7d5e0" Content="Выключить" Command="{Binding ExitGameCommand}"/>
         </WrapPanel>
 
         <StackPanel Grid.ColumnSpan="2" Orientation="Horizontal" Background="#1b2838">
