@@ -7,7 +7,8 @@
         xmlns:viewmodel="clr-namespace:HeartRateMonitor.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:MainVM}"
         mc:Ignorable="d"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:controls="clr-namespace:Windows.UI.Xaml.Controls;assembly=Windows"
-        Title="{Binding Title}" Height="450" Width="900" 
+        Title="{Binding Title}" Height="500" Width="1000"
+        
        WindowStartupLocation="CenterScreen" SnapsToDevicePixels="True" ResizeMode="NoResize" Cursor="Hand">
     <Grid>
         <!--<Grid.RowDefinitions>
@@ -81,11 +82,12 @@
         </Border>
         <StackPanel Grid.Column="2" HorizontalAlignment="Left" Height="100" Margin="233.8,292,0,0" VerticalAlignment="Top" Width="183"/>-->
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="125"/>
             <ColumnDefinition Width="*"/>
        
         </Grid.ColumnDefinitions>
-        <Path Grid.Column="0" Stretch="Uniform" Margin="12,10,12,0" VerticalAlignment="Top" Width="25" Height="25" Fill="Red" Data="M5,3C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3H5M6,9H7.5L8.5,12.43L9.5,9H11L9.25,15H7.75L6,9M13,9H16.5C17.35,9 18,9.65 18,10.5V11.5C18,12.1 17.6,12.65 17.1,12.9L18,15H16.5L15.65,13H14.5V15H13V9M14.5,10.5V11.5H16.5V10.5H14.5Z" />
+        
+        <Path Grid.Column="0" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top" Width="30" Height="30" Stretch="Uniform" Fill="Red" Data="M5,3C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3H5M6,9H7.5L8.5,12.43L9.5,9H11L9.25,15H7.75L6,9M13,9H16.5C17.35,9 18,9.65 18,10.5V11.5C18,12.1 17.6,12.65 17.1,12.9L18,15H16.5L15.65,13H14.5V15H13V9M14.5,10.5V11.5H16.5V10.5H14.5Z" />
         <!--<ListBox Grid.Column="0" SelectedItem="{Binding CurrentPage}" SelectionMode="Single"  x:Name="sideBar" Margin="0,50,0,50" BorderThickness="0" Grid.ColumnSpan="2" >
             <local:NavButton Navlink="/View/HeartRateView.xaml"  Padding="7" Icon="M2,12L12,3L22,12H19V20H5V12H2M12,18L12.72,17.34C15.3,15 17,13.46 17,11.57C17,10.03 15.79,8.82 14.25,8.82C13.38,8.82 12.55,9.23 12,9.87C11.45,9.23 10.62,8.82 9.75,8.82C8.21,8.82 7,10.03 7,11.57C7,13.46 8.7,15 11.28,17.34L12,18Z" Cursor="Hand"/>
             <local:NavButton Navlink="/View/ConnectionBLEWindow.xaml" Padding="7" Icon="M14.88,14.29L13,16.17V12.41L14.88,14.29M13,3.83L14.88,5.71L13,7.59M17.71,5.71L12,0H11V7.59L6.41,3L5,4.41L10.59,10L5,15.59L6.41,17L11,12.41V20H12L17.71,14.29L13.41,10L17.71,5.71M15,24H17V22H15M7,24H9V22H7M11,24H13V22H11V24Z" Cursor="Hand"/>
@@ -94,10 +96,13 @@
             <local:NavButton Padding="7" Icon="M12,3C7.58,3 4,4.79 4,7C4,9.21 7.58,11 12,11C16.42,11 20,9.21 20,7C20,4.79 16.42,3 12,3M4,9V12C4,14.21 7.58,16 12,16C16.42,16 20,14.21 20,12V9C20,11.21 16.42,13 12,13C7.58,13 4,11.21 4,9M4,14V17C4,19.21 7.58,21 12,21C16.42,21 20,19.21 20,17V14C20,16.21 16.42,18 12,18C7.58,18 4,16.21 4,14Z"/>
         </ListBox>
         <Frame Grid.Column="2" NavigationUIVisibility="Hidden" x:Name="navFrame" Background="#e9ecef" Grid.ColumnSpan="4"/>-->
-        <ListBox Grid.Column="0" BorderThickness="0" Background="White" BorderBrush="Black" ItemsSource="{Binding Pages}" SelectedItem="{Binding CurrentPage}"  Margin="0,40,0,0">
+        <ListBox HorizontalContentAlignment="Center" Grid.Column="0" BorderThickness="0" Background="White" BorderBrush="Black" ItemsSource="{Binding Pages}" SelectedItem="{Binding CurrentPage}"  Margin="0,40,0,0">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding Title}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5"/>
+                    <StackPanel>
+                        <Path Data="{Binding Data}" Width="25" Height="25" Fill="#7b8792"/>
+                        <TextBlock Text="{Binding Title}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5"/>
+                    </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>

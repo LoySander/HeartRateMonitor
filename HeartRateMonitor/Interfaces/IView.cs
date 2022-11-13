@@ -9,5 +9,7 @@ namespace HeartRateMonitor.Interfaces
     public interface IView
     {
         string Title { get; set; }
+
+        string Data { get; set; }
     }
 }

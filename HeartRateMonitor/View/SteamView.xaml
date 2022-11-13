@@ -8,7 +8,7 @@
       xmlns:converters="clr-namespace:HeartRateMonitor.Converters"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="750"
-      Title="SteamView">
+      Title="Сцены">
     <Page.Resources>
         <converters:ConverterGameToName x:Key="GameToName"/>
     </Page.Resources>

@@ -7,7 +7,7 @@
         xmlns:viewmodel="clr-namespace:HeartRateMonitor.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:ConnectionBLEViewModel}"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:converters="clr-namespace:HeartRateMonitor.Converters"
       mc:Ignorable="d"
-        Title="ConnectionBLEWindow" Height="450" Width="750">
+        Title="Подключение" Height="500" Width="875">
     <Page.Resources>
         <converters:ConverterDeviceInfoToName x:Key="DeviceInfoToName"/>
     </Page.Resources>
