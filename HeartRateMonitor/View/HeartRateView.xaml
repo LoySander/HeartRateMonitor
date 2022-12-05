@@ -12,7 +12,8 @@
 
     <Grid Background="#f1f3f5">
         <Grid.RowDefinitions>
-            <RowDefinition/>
+            <RowDefinition Height="75"/>
+            <RowDefinition Height="75"/>
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
@@ -20,9 +21,10 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
             <ColumnDefinition/>
+            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <TextBlock Grid.ColumnSpan="3" Text="HeartRate" FontFamily="ubuntu" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#FFB197FC" FontSize="60" FontWeight="Bold"/>
-        <StackPanel Margin="20" Grid.Row="0" Grid.ColumnSpan="2" Grid.RowSpan="2">
+        <TextBlock Grid.ColumnSpan="2" Grid.Column="1" Text="HeartRate" FontFamily="ubuntu" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#FFB197FC" FontSize="60" FontWeight="Bold"/>
+        <StackPanel Margin="20" Grid.Row="2" Grid.ColumnSpan="2" Grid.RowSpan="2">
             <GroupBox HorizontalAlignment="Stretch"  Header="Card Group Box" Style="{StaticResource MaterialDesignCardGroupBox}" materialDesign:ColorZoneAssist.Mode="Light" Height="260" >
                 <GroupBox.HeaderTemplate>
                     <DataTemplate>
@@ -35,9 +37,9 @@
                 <TextBlock Height="100" Width="100" Text="{Binding HeartRate.HeartRateLevel}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             </GroupBox>
         </StackPanel>
-        <Button Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" Width="150"  Style="{StaticResource MaterialDesignFlatMidBgButton}" ToolTip="MaterialDesignFlatMidButton" Content="Старт" 
+        <Button Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Width="150"  Style="{StaticResource MaterialDesignFlatMidBgButton}" ToolTip="MaterialDesignFlatMidButton" Content="Старт" 
              Command="{Binding StartСommand}" IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" Cursor="Hand" />
-        <Button Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Width="150"  Style="{StaticResource MaterialDesignFlatMidBgButton}" ToolTip="MaterialDesignFlatMidButton" Content="Стоп" 
+        <Button Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Width="150"  Style="{StaticResource MaterialDesignFlatMidBgButton}" ToolTip="MaterialDesignFlatMidButton" Content="Стоп" 
              Command="{Binding StopCommand}" IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" />
     </Grid>
 </Page>

@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Threading;
 using Windows.Devices.Bluetooth;
 using Windows.Devices.Bluetooth.GenericAttributeProfile;
+using Windows.Services.Maps;
 using Windows.Storage.Streams;
 
 namespace HeartRateMonitor.Model
@@ -42,8 +43,13 @@ namespace HeartRateMonitor.Model
         private bool isHeartRateStarted;
         private bool isSafeData = false;
         private bool isSound = false;
+        private bool isFitting = false;
         private MediaPlayer player;
         private int norm = 0;
+        private int count = 0;
+        private List<float> heartRates = new List<float>();
+        private SSA sSA = null;
+
 
         public static HeartRate getInstance()
         {
@@ -55,10 +61,12 @@ namespace HeartRateMonitor.Model
         public HeartRate()
         {
             isHeartRateStarted = false;
-             player = new MediaPlayer();
+            player = new MediaPlayer();
             player.Open(new Uri(@"C:\Users\Stas\source\repos\Test\Volume.mp3", UriKind.RelativeOrAbsolute));
             csvcontent = new StringBuilder();
             csvcontent.AppendLine("Date;Rate");
+            sSA = new SSA();
+            
         }
         public bool IsSafeData
         {
@@ -177,11 +185,25 @@ namespace HeartRateMonitor.Model
             norm = ((int)(((206 - (0.685 * age)) - heartRateSimple) * 0.5 + heartRateSimple));
         }
 
-        private void Characteristic_ValueChanged(GattCharacteristic sender, GattValueChangedEventArgs args)
+        private async void Characteristic_ValueChanged(GattCharacteristic sender, GattValueChangedEventArgs args)
         {
             var reader = DataReader.FromBuffer(args.CharacteristicValue);
             var x = reader.ReadInt16();
             HeartRateLevel = x.ToString();
+            if (heartRates.Count == 50 && !isFitting)
+            {
+                sSA.ConvertListToModelInput(heartRates);
+                heartRates.Clear();
+                await sSA.Fitting();
+                isFitting = true;
+            }
+            if(heartRates.Count >= 5 && isFitting)
+            {
+                await sSA.PredictData((Microsoft.ML.IDataView)heartRates.Take(5).ToList());
+                heartRates.Clear();
+            }
+            heartRates.Add(float.Parse(x.ToString()));
+
         }
         void RunHeartrateKeepAlive()
         {
