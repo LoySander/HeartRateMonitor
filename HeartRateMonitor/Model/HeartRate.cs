@@ -41,9 +41,9 @@ namespace HeartRateMonitor.Model
         private Thread keepHeartrateAliveThread;
         private StringBuilder csvcontent = null;
         private bool isHeartRateStarted;
-        private bool isSafeData = false;
-        private bool isSound = false;
-        private bool isFitting = false;
+        private bool _isSafeData = false;
+        private bool _isSound = false;
+        private bool _isFitting = false;
         private MediaPlayer player;
         private int norm = 0;
         private int count = 0;
@@ -70,16 +70,16 @@ namespace HeartRateMonitor.Model
         }
         public bool IsSafeData
         {
-            get { return isSafeData; }
+            get { return _isSafeData; }
             set
             {
-                isSafeData = value;
+                _isSafeData = value;
             }
         }
         public bool IsSound
         {
-            get { return isSound; }
-            set { isSound = value;
+            get { return _isSound; }
+            set { _isSound = value;
                   
             }
         }
@@ -90,6 +90,12 @@ namespace HeartRateMonitor.Model
             {
                 norm = value;
             }
+        }
+
+        public bool IsFitting
+        {
+            get => _isFitting;
+            set => _isFitting = value;          
         }
         public async Task StartHeartrateMonitorAsync(BluetoothLEDevice bluetoothLE)
         {
@@ -171,7 +177,7 @@ namespace HeartRateMonitor.Model
             get { return _heartRate; }
             set {
                  _heartRate = value;
-                if (int.Parse(_heartRate) > norm && isSound == true)
+                if (int.Parse(_heartRate) > norm && _isSound == true)
                 {
                     player.Dispatcher.BeginInvoke(new PlayerStart(StartPlay));
                 }
@@ -190,14 +196,14 @@ namespace HeartRateMonitor.Model
             var reader = DataReader.FromBuffer(args.CharacteristicValue);
             var x = reader.ReadInt16();
             HeartRateLevel = x.ToString();
-            if (heartRates.Count == 50 && !isFitting)
+            if (heartRates.Count == 50 && _isFitting)
             {
                 sSA.ConvertListToModelInput(heartRates);
                 heartRates.Clear();
                 await sSA.Fitting();
-                isFitting = true;
+                _isFitting = false;
             }
-            if(heartRates.Count >= 5 && isFitting)
+            if(heartRates.Count >= 5 && !_isFitting)
             {
                 await sSA.PredictData((Microsoft.ML.IDataView)heartRates.Take(5).ToList());
                 heartRates.Clear();
@@ -227,7 +233,7 @@ namespace HeartRateMonitor.Model
 
         public void StopHeartRate()
         {
-            if (isSafeData)
+            if (_isSafeData)
             {
                 File.AppendAllText(@"C:\Users\Stas\Desktop\data.csv", csvcontent.ToString());
             }

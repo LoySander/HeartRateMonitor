@@ -44,16 +44,14 @@
         <StackPanel Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" Orientation="Horizontal" Width="325">
 
             <CheckBox 
-                Style="{StaticResource MaterialDesignFilterChipCheckBox}"
-                         IsChecked="False"
-                                     Content="Сохранять данные" VerticalAlignment="Center" />
+                Style="{StaticResource MaterialDesignFilterChipCheckBox}" Content="Сохранять данные" VerticalAlignment="Center" Cursor="Hand" IsChecked="{Binding IsSafeData}" />
             <CheckBox 
                 Style="{StaticResource MaterialDesignFilterChipCheckBox}"
-                         IsChecked="False"
-                                     Content="Звук"  VerticalAlignment="Center"/>
+                         IsChecked="{Binding IsSound}"
+                                     Content="Звук"  VerticalAlignment="Center" Cursor="Hand"/>
             <CheckBox 
                 Style="{StaticResource MaterialDesignFilterChipCheckBox}"
-                         IsChecked="False"
+                         IsChecked="{Binding IsLearn}"
                                      Content="Обучить модель" VerticalAlignment="Center" />
         </StackPanel>
     </Grid>

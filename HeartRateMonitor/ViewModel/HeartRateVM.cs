@@ -23,8 +23,9 @@ namespace HeartRateMonitor.ViewModel
         private ConnectionToBLE connection;
         private HeartRate heartRate;
         public event PropertyChangedEventHandler PropertyChanged;
-        private bool isSafeData;
-        private bool isSound;
+        private bool _isSafeData;
+        private bool _isSound;
+        private bool _isLearn;
        
         public HeartRateVM()
         {
@@ -82,8 +83,9 @@ namespace HeartRateMonitor.ViewModel
                 return startСommand ??
                     (startСommand = new RelayCommand(async obj =>
                     {
-                        heartRate.IsSafeData = isSafeData;
-                        heartRate.IsSound = isSound;
+                        heartRate.IsSafeData = _isSafeData;
+                        heartRate.IsSound = _isSound;
+                        heartRate.IsFitting = _isLearn;
                         if(heartRate.Norm == 0)
                         {
                             heartRate.Norm = 130;
@@ -134,8 +136,8 @@ namespace HeartRateMonitor.ViewModel
         }
         public bool IsSafeData
         {
-            get { return isSafeData; }
-            set { isSafeData = value;
+            get { return _isSafeData; }
+            set { _isSafeData = value;
                 OnPropertyChanged(nameof(IsSafeData));
                // showService.ShowMessageBox("Хорошо, данные будут записываться в файл");
             }
@@ -143,11 +145,21 @@ namespace HeartRateMonitor.ViewModel
         
         public bool IsSound
         {
-            get { return isSound; }
+            get { return _isSound; }
             set {
-                isSound = value;
+                _isSound = value;
                 OnPropertyChanged(nameof(IsSound));
                // showService.ShowMessageBox("Хорошо, вы включили звуковое оповещение");
+            }
+        }
+
+        public bool IsLearn
+        {
+            get => _isLearn;
+            set
+            {
+                _isLearn = value;
+                OnPropertyChanged();
             }
         }
     }
