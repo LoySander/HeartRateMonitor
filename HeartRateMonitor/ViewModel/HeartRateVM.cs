@@ -86,6 +86,7 @@ namespace HeartRateMonitor.ViewModel
                         heartRate.IsSafeData = _isSafeData;
                         heartRate.IsSound = _isSound;
                         heartRate.IsFitting = _isLearn;
+                        heartRate.DataPoints = null;
                         if(heartRate.Norm == 0)
                         {
                             heartRate.Norm = 130;

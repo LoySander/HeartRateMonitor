@@ -236,7 +236,10 @@ namespace HeartRateMonitor.Model
                 heartRates.Clear();
             }
             heartRates.Add(float.Parse(x.ToString()));
-            dataPoints.Add(new DataPoint { ValueX = count, ValueY = float.Parse(x.ToString())});
+            App.Current.Dispatcher.Invoke((System.Action)delegate
+            {
+                dataPoints.Add(new DataPoint { ValueX = count, ValueY = float.Parse(x.ToString()) });
+            });
         }
         void RunHeartrateKeepAlive()
         {
