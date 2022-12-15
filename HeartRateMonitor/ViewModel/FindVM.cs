@@ -135,7 +135,7 @@ namespace HeartRateMonitor.ViewModel
                         //придумать
                         Thread.Sleep(500);
                         showService.ShowMessageBox(connection.GetBluetoothLE().ConnectionStatus.ToString());
-                        messageBoxService.ShowOrOpen(0, messageVM, true);
+                       // messageBoxService.ShowOrOpen(0, messageVM, true);
                        // showService.ShowOrOpen(1, this, false);
                     }));
             }

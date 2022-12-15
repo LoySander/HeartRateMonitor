@@ -95,7 +95,10 @@ namespace HeartRateMonitor.Model
         public bool IsFitting
         {
             get => _isFitting;
-            set => _isFitting = value;          
+            set {
+                _isFitting = value;
+                }
+
         }
         public async Task StartHeartrateMonitorAsync(BluetoothLEDevice bluetoothLE)
         {
@@ -196,7 +199,7 @@ namespace HeartRateMonitor.Model
             var reader = DataReader.FromBuffer(args.CharacteristicValue);
             var x = reader.ReadInt16();
             HeartRateLevel = x.ToString();
-            if (heartRates.Count == 50 && _isFitting)
+            if (heartRates.Count == 10 && _isFitting)
             {
                 sSA.ConvertListToModelInput(heartRates);
                 heartRates.Clear();
@@ -205,7 +208,7 @@ namespace HeartRateMonitor.Model
             }
             if(heartRates.Count >= 5 && !_isFitting)
             {
-                await sSA.PredictData((Microsoft.ML.IDataView)heartRates.Take(5).ToList());
+                await sSA.PredictData(heartRates.Take(5).ToList());
                 heartRates.Clear();
             }
             heartRates.Add(float.Parse(x.ToString()));

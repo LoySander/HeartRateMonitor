@@ -21,12 +21,11 @@ namespace HeartRateMonitor.Model
         private List<DeviceInformation> devices = null;
 
         public event PropertyChangedEventHandler PropertyChanged;
-        //private List<string> names = null;
+        
 
         public BLE_Device()
         {
-            devices = new List<DeviceInformation>();
-            //names = new List<string>();       
+            devices = new List<DeviceInformation>();    
         }
 
         public static BLE_Device getInstance()
@@ -47,17 +46,6 @@ namespace HeartRateMonitor.Model
             }
 
         }
-        //public List<string> Names
-        //{
-        //    get { return names; }
-
-        //    set
-        //    {
-        //        names = value;
-        //        OnPropertyChanged("Name");
-        //    }
-
-        //}
 
         public DeviceInformation Device
         {

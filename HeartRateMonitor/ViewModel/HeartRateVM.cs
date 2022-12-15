@@ -98,7 +98,7 @@ namespace HeartRateMonitor.ViewModel
                         {
                             await heartRate.StartHeartrateMonitorAsync(connection.GetBluetoothLE());
                         }
-                        SelectedDevice = device.Device.Name.ToString();
+                        //SelectedDevice = device.Device.Name.ToString();
                     }));
             }
         }
