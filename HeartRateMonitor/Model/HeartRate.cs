@@ -1,6 +1,7 @@
 ﻿using HeartRateMonitor.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
@@ -48,6 +49,7 @@ namespace HeartRateMonitor.Model
         private int norm = 0;
         private int count = 0;
         private List<float> heartRates = new List<float>();
+        private ObservableCollection<DataPoint> dataPoints = new ObservableCollection<DataPoint>();
         private SSA sSA = null;
 
 
@@ -65,7 +67,7 @@ namespace HeartRateMonitor.Model
             player.Open(new Uri(@"C:\Users\Stas\source\repos\Test\Volume.mp3", UriKind.RelativeOrAbsolute));
             csvcontent = new StringBuilder();
             csvcontent.AppendLine("Date;Rate");
-            sSA = new SSA();
+            SSA = new SSA();
             
         }
         public bool IsSafeData
@@ -92,6 +94,16 @@ namespace HeartRateMonitor.Model
             }
         }
 
+        public SSA SSA
+        {
+            get { return sSA; }
+            set
+            {
+                sSA = value;
+                OnPropertyChanged();
+            }
+        }
+
         public bool IsFitting
         {
             get => _isFitting;
@@ -100,6 +112,17 @@ namespace HeartRateMonitor.Model
                 }
 
         }
+
+        public ObservableCollection<DataPoint> DataPoints
+        {
+            get { return dataPoints; }
+            set
+            {
+                dataPoints = value;
+                OnPropertyChanged(nameof(DataPoints));
+            }
+        }
+
         public async Task StartHeartrateMonitorAsync(BluetoothLEDevice bluetoothLE)
         {
             if (isHeartRateStarted)
@@ -199,6 +222,7 @@ namespace HeartRateMonitor.Model
             var reader = DataReader.FromBuffer(args.CharacteristicValue);
             var x = reader.ReadInt16();
             HeartRateLevel = x.ToString();
+            count++;
             if (heartRates.Count == 10 && _isFitting)
             {
                 sSA.ConvertListToModelInput(heartRates);
@@ -212,7 +236,7 @@ namespace HeartRateMonitor.Model
                 heartRates.Clear();
             }
             heartRates.Add(float.Parse(x.ToString()));
-
+            dataPoints.Add(new DataPoint { ValueX = count, ValueY = float.Parse(x.ToString())});
         }
         void RunHeartrateKeepAlive()
         {
@@ -274,6 +298,28 @@ namespace HeartRateMonitor.Model
             isHeartRateStarted = false;
             GC.Collect();
         }
+
+        //public IEnumerable<DataPoint> GetPoints()
+        //{
+        //    var listPoints = new List<DataPoint>();
+
+        //    try
+        //    {
+        //        for (int i = 1; i <= 30; i++)
+        //        {
+        //            //int y = Man.StepsOfDay[i];
+                    
+        //            listPoints.Add(new DataPoint { ValueX = i, ValueY = y });
+        //        }
+        //        DataPoints = listPoints;
+        //        return DataPoints;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        System.Windows.MessageBox.Show("Ошибка " + ex.Message.ToString());
+        //        return null;
+        //    }
+        //}
     }
 
 }
