@@ -38,7 +38,8 @@ namespace HeartRateMonitor.ViewModel
                 IocContainer.Resolve<ConnectionBLEWindow>(),
                 IocContainer.Resolve<HeartRateView>(),
                 IocContainer.Resolve<SteamView>(),
-                IocContainer.Resolve<InformationUserView>()
+                IocContainer.Resolve<InformationUserView>(),
+                IocContainer.Resolve<DatabaseView>()
             };
             CurrentPage = Pages[0];
         }

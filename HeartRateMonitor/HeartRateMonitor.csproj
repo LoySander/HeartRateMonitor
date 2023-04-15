@@ -172,12 +172,16 @@
     <Compile Include="NavButton.cs" />
     <Compile Include="Services\IocContainer.cs" />
     <Compile Include="ViewModel\ConnectionBLEViewModel.cs" />
+    <Compile Include="ViewModel\DatabaseVM.cs" />
     <Compile Include="ViewModel\MainVM.cs" />
     <Compile Include="ViewModel\MessageVM.cs" />
     <Compile Include="ViewModel\SteamVM.cs" />
     <Compile Include="ViewModel\UserVM.cs" />
     <Compile Include="View\ConnectionBLEWindow.xaml.cs">
       <DependentUpon>ConnectionBLEWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\DatabaseView.xaml.cs">
+      <DependentUpon>DatabaseView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\HeartRateView.xaml.cs">
       <DependentUpon>HeartRateView.xaml</DependentUpon>
@@ -196,6 +200,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="View\ConnectionBLEWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\DatabaseView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
