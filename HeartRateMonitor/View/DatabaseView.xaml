@@ -6,12 +6,45 @@
       xmlns:local="clr-namespace:HeartRateMonitor.View"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d" 
-      xmlns:viewmodel="clr-namespace:HeartRateMonitor.ViewModel"
-      d:DataContext="{d:DesignInstance Type=viewmodel:DatabaseVM}"
+      xmlns:viewmodel="clr-namespace:HeartRateMonitor.ViewModel.DBViewModel"
+      d:DataContext="{d:DesignInstance Type=viewmodel:DatabaseMainVM}"
       d:DesignHeight="450" d:DesignWidth="800"
+      xmlns:controls="clr-namespace:Windows.UI.Xaml.Controls;assembly=Windows"
       Title="БД">
+    <Page.Resources>
+        <DataTemplate x:Key="listTemplate">
+            <StackPanel>
+                <Path Data="{Binding Data}" Width="25" Height="25" Fill="#7b8792"/>
+                <TextBlock Text="{Binding Title}" VerticalAlignment="Center" Margin="5"/>
+            </StackPanel>
+        </DataTemplate>
+    </Page.Resources>
 
-    <Grid>
-        
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="75"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <!--<ListBox VerticalContentAlignment="Stretch" HorizontalContentAlignment="Left" Grid.Row="0" BorderThickness="0" Background="White" BorderBrush="Black" ItemsSource="{Binding Databases}" SelectedItem="{Binding CurrentDatabasePage}"  Margin="0,20,0,0">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <Path Data="{Binding Data}" Width="25" Height="25" Fill="#7b8792"/>
+                        <TextBlock Text="{Binding Title}" VerticalAlignment="Center" Margin="5"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>-->
+        <ListBox HorizontalAlignment="Stretch" ScrollViewer.VerticalScrollBarVisibility="Disabled" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Center" ItemTemplate="{StaticResource listTemplate}" Grid.Row="0" BorderThickness="0" Background="White" BorderBrush="Black" ItemsSource="{Binding Databases}" SelectedItem="{Binding CurrentDatabasePage}"  Margin="0,10,0,0">
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel />
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+        </ListBox>
+        <Frame Content="{Binding CurrentDatabasePage}"  NavigationUIVisibility="Hidden" HorizontalAlignment="Center" VerticalAlignment="Center" >
+
+        </Frame>
     </Grid>
 </Page>

@@ -1,5 +1,6 @@
 ﻿using HeartRateMonitor.Services;
 using HeartRateMonitor.ViewModel;
+using HeartRateMonitor.ViewModel.DBViewModel;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -23,7 +24,11 @@ namespace HeartRateMonitor
             IocContainer.Register<SteamVM>();
             IocContainer.Register<UserVM>();
             IocContainer.Register<MainVM>();
-            IocContainer.Register<DatabaseVM>();
+            IocContainer.Register<DatabaseMainVM>();
+            IocContainer.Register<DeviceVM>();
+            IocContainer.Register<ParametersVM>();
+            IocContainer.Register<ScenesVM>();
+            IocContainer.Register<UsersVM>();
 
             IocContainer.Resolve<MainWindow>().Show();
         }

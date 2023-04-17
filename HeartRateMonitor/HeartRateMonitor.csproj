@@ -172,7 +172,11 @@
     <Compile Include="NavButton.cs" />
     <Compile Include="Services\IocContainer.cs" />
     <Compile Include="ViewModel\ConnectionBLEViewModel.cs" />
-    <Compile Include="ViewModel\DatabaseVM.cs" />
+    <Compile Include="ViewModel\DBViewModel\DatabaseMainVM.cs" />
+    <Compile Include="ViewModel\DBViewModel\DeviceVM.cs" />
+    <Compile Include="ViewModel\DBViewModel\ParametersVM.cs" />
+    <Compile Include="ViewModel\DBViewModel\ScenesVM.cs" />
+    <Compile Include="ViewModel\DBViewModel\UsersVM.cs" />
     <Compile Include="ViewModel\MainVM.cs" />
     <Compile Include="ViewModel\MessageVM.cs" />
     <Compile Include="ViewModel\SteamVM.cs" />
@@ -182,6 +186,18 @@
     </Compile>
     <Compile Include="View\DatabaseView.xaml.cs">
       <DependentUpon>DatabaseView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\DBView\DevicesView.xaml.cs">
+      <DependentUpon>DevicesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\DBView\ParametersView.xaml.cs">
+      <DependentUpon>ParametersView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\DBView\ScenesView.xaml.cs">
+      <DependentUpon>ScenesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\DBView\UsersView.xaml.cs">
+      <DependentUpon>UsersView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\HeartRateView.xaml.cs">
       <DependentUpon>HeartRateView.xaml</DependentUpon>
@@ -204,6 +220,22 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\DatabaseView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\DBView\DevicesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\DBView\ParametersView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\DBView\ScenesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\DBView\UsersView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
