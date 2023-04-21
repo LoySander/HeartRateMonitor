@@ -9,6 +9,28 @@
       Title="Пользователи">
 
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="0.8*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="0.2*" />
+            </Grid.RowDefinitions>
+        <ListBox Grid.Column="0" ItemsSource="{Binding Users}"
+                 SelectedItem="{Binding SelectedUser}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Margin="5">
+                        <TextBlock FontSize="18" Text="{Binding Path=Id}" />
+                        <TextBlock Text="{Binding Path=Surname}" />
+                        <TextBlock Text="{Binding Path=Name}" />
+                        <TextBlock Text="{Binding Path=MiddleName}" />
+                        <TextBlock Text="{Binding Path=Birthday,StringFormat=dd-MM-yyyy}" />
+                        <TextBlock Text="{Binding Path=AverageHeartRate}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
     </Grid>
 </Page>
