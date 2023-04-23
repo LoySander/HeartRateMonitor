@@ -171,8 +171,15 @@
     <Compile Include="Converters\ConverterGameToName.cs" />
     <Compile Include="Interfaces\IView.cs" />
     <Compile Include="Model\CollectionEx.cs" />
+    <Compile Include="Model\DatabaseModel\Context\ApplicationContext.cs" />
+    <Compile Include="Model\DatabaseModel\Device.cs" />
+    <Compile Include="Model\DatabaseModel\DeviceModelDB.cs" />
+    <Compile Include="Model\DatabaseModel\ParameterModelBL.cs" />
+    <Compile Include="Model\DatabaseModel\Physiological_parameter.cs" />
+    <Compile Include="Model\DatabaseModel\Scene.cs" />
+    <Compile Include="Model\DatabaseModel\SceneModelBL.cs" />
     <Compile Include="Model\DatabaseModel\User.cs" />
-    <Compile Include="Model\DatabaseModel\UserContext.cs" />
+    <Compile Include="Model\DatabaseModel\UserModelBL.cs" />
     <Compile Include="Model\DataPoint.cs" />
     <Compile Include="Model\HeartRate.cs" />
     <Compile Include="Model\ModelInput.cs" />

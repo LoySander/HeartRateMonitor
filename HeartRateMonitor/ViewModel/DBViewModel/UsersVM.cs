@@ -8,6 +8,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using HeartRateMonitor.Model.DatabaseModel;
+using HeartRateMonitor.Model.DatabaseModel.Context;
 using Windows.Media.AppBroadcasting;
 
 namespace HeartRateMonitor.ViewModel.DBViewModel
@@ -18,6 +19,7 @@ namespace HeartRateMonitor.ViewModel.DBViewModel
         public ObservableCollection<User> Users { get; set; }
 
         private User _selectedUser { get; set; }
+        private UserModelBL _userModelBL;
 
         #region свойства
         public User SelectedUser
@@ -92,20 +94,13 @@ namespace HeartRateMonitor.ViewModel.DBViewModel
 
         public UsersVM()
         {
-            Users = new ObservableCollection<User>();
-            using (UserContext context = new UserContext())
-            {
-                List<User> temp = context.Users.ToList();
-                foreach (var item in temp)
-                {
-                    Users.Add(item);
-                }
-            }
+            _userModelBL = new UserModelBL();
+            Users = new ObservableCollection<User>(_userModelBL.GetAllUsers());
         }
 
         public void Update()
         {
-            using (UserContext context = new UserContext())
+            using (ApplicationContext context = new ApplicationContext())
             {
                 //context.Entry(SelectedBook).State = System.Data.Entity.EntityState.Modified;
                 context.SaveChanges();

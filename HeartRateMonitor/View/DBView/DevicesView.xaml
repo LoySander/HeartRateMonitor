@@ -10,6 +10,28 @@
       Title="Устройства">
 
     <Grid>
-        
+
+        <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="0.8*" />
+            </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="0.2*" />
+        </Grid.RowDefinitions>
+         <ListBox Grid.Column="0" ItemsSource="{Binding Devices}"
+                 SelectedItem="{Binding SelectedDevice}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Margin="5">
+                            <TextBlock FontSize="18" Text="{Binding Path=Id}" />
+                            <TextBlock Text="{Binding Path=IdCompany}" />
+                            <TextBlock Text="{Binding Path=Name}" />
+                        <TextBlock Text="{Binding Path=Type}" />
+                    </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+        </ListBox>
     </Grid>
+    
 </Page>
