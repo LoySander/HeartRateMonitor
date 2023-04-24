@@ -7,18 +7,16 @@ using System.Threading.Tasks;
 
 namespace HeartRateMonitor.Model.DatabaseModel
 {
-    [Table("scenes")]
-    public class Scene
+    [Table("scene_types")]
+    public class SceneType
     {
-        [Column("scene_id")]
-        public int Id { get; set; }
-        [Column("title")]
-        public string Name { get; set; }
-        [Column("activity")]
-        public int Activity { get; set; }
-        [Column("scene_type")]
-        public int Type { get; set; }
 
-        public SceneType SceneType { get; set; }
+        [Column("type_id")]
+        public int Id { get; set; }
+        [Column("type")]
+        public string Name { get; set; }
+
+        public List<Scene> Scenes { get; set; }
+        
     }
 }

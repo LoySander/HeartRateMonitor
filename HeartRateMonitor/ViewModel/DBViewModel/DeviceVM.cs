@@ -1,5 +1,6 @@
 ﻿using HeartRateMonitor.Model.DatabaseModel;
 using HeartRateMonitor.Model.DatabaseModel.Context;
+using HeartRateMonitor.Model.DatabaseModel.DTO;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -15,14 +16,14 @@ namespace HeartRateMonitor.ViewModel.DBViewModel
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public ObservableCollection<Device> Devices { get; set; }
+        public ObservableCollection<DeviceDTO> Devices { get; set; }
 
-        private Device _selectedDevice { get; set; }
+        private DeviceDTO _selectedDevice { get; set; }
 
         private DeviceModelDB deviceModelDB;
 
         #region свойства
-        public Device SelectedDevice
+        public DeviceDTO SelectedDevice
         {
             get { return _selectedDevice; }
             set
@@ -72,13 +73,25 @@ namespace HeartRateMonitor.ViewModel.DBViewModel
             }
 
         }
+        
+        public string NameCompany
+        {
+            get { return _selectedDevice.Company.Name; }
+            set
+            {
+                _selectedDevice.Company.Name = value;
+                OnPropertyChanged();
+            }
+        }
       
         #endregion
 
         public DeviceVM()
         {
             deviceModelDB = new DeviceModelDB();
-            Devices = new ObservableCollection<Device>(deviceModelDB.GetAllDevices());
+           // Devices = new ObservableCollection<DeviceDTO>(deviceModelDB.GetAllDevices());
+            Devices = new ObservableCollection<DeviceDTO>(deviceModelDB.GetAllDevicesWithCompany());
+           
         }
 
         public void Update()

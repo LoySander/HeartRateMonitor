@@ -5,18 +5,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HeartRateMonitor.Model.DatabaseModel
+namespace HeartRateMonitor.Model.DatabaseModel.DTO
 {
-    [Table("scenes")]
-    public class Scene
+    public class SceneDTO
     {
-        [Column("scene_id")]
+       
         public int Id { get; set; }
-        [Column("title")]
+       
         public string Name { get; set; }
-        [Column("activity")]
+       
         public int Activity { get; set; }
-        [Column("scene_type")]
+      
         public int Type { get; set; }
 
         public SceneType SceneType { get; set; }

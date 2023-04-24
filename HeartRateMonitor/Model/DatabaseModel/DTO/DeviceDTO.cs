@@ -5,20 +5,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HeartRateMonitor.Model.DatabaseModel
+namespace HeartRateMonitor.Model.DatabaseModel.DTO
 {
-    public class Device
+    public class DeviceDTO
     {
-        [Column("device_id")]
+       
         public int Id { get; set; }
-        [Column("company_id")]
+        
         public int IdCompany { get; set; }
-        [Column("title_device")]
+        
         public string Name { get; set; }
-        [Column("type")]
+       
         public Byte? Type { get; set; }
 
         public Company Company { get; set; }
-       
     }
 }
