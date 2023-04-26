@@ -9,9 +9,9 @@ namespace HeartRateMonitor.Model.DatabaseModel.DTO
 {
     public class SceneTypeDTO
     {
-        [Column("type_id")]
+      
         public int Id { get; set; }
-        [Column("type")]
+       
         public string Name { get; set; }
 
         public List<Scene> Scenes { get; set; }

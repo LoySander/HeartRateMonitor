@@ -27,6 +27,7 @@
                         <TextBlock Text="{Binding Path=Name}" />
                         <TextBlock Text="{Binding Path=Activity}" />
                         <TextBlock Text="{Binding Path=Type}" />
+                        <TextBlock Text="{Binding Path=SceneType.Name}" />
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>

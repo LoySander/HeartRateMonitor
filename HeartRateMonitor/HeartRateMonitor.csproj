@@ -169,12 +169,14 @@
     </ApplicationDefinition>
     <Compile Include="Converters\ConverterDeviceInfoToName.cs" />
     <Compile Include="Converters\ConverterGameToName.cs" />
+    <Compile Include="Interfaces\IRepository.cs" />
     <Compile Include="Interfaces\IView.cs" />
     <Compile Include="Model\CollectionEx.cs" />
     <Compile Include="Model\DatabaseModel\Company.cs" />
     <Compile Include="Model\DatabaseModel\Context\ApplicationContext.cs" />
     <Compile Include="Model\DatabaseModel\Device.cs" />
     <Compile Include="Model\DatabaseModel\DeviceModelDB.cs" />
+    <Compile Include="Model\DatabaseModel\DeviceRepository.cs" />
     <Compile Include="Model\DatabaseModel\DTO\CompanyDTO.cs" />
     <Compile Include="Model\DatabaseModel\DTO\DeviceDTO.cs" />
     <Compile Include="Model\DatabaseModel\DTO\SceneDTO.cs" />

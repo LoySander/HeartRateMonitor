@@ -18,5 +18,16 @@ namespace HeartRateMonitor.Model.DatabaseModel.Context
         public DbSet<Scene> Scenes { get; set; }    
         public DbSet<Physiological_parameter> Parameters { get; set; }
         public DbSet<Company> Companies { get;set; }
+        public DbSet<SceneType> SceneTypes { get; set; }
+
+        //protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        //{
+        //    modelBuilder.Entity<Company>()
+        //        .HasMany(c => c.Devices)
+        //        .WithRequired(c => c.Company);
+
+
+        //    base.OnModelCreating(modelBuilder);
+        //}
     }
 }

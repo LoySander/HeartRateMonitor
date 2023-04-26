@@ -17,5 +17,9 @@ namespace HeartRateMonitor.Model.DatabaseModel
 
         public List<Device> Devices { get; set; }
         
+        public Company()
+        {
+            Devices = new List<Device>();
+        }
     }
 }

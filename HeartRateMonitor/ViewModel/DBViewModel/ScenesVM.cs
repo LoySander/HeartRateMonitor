@@ -1,5 +1,6 @@
 ﻿using HeartRateMonitor.Model.DatabaseModel;
 using HeartRateMonitor.Model.DatabaseModel.Context;
+using HeartRateMonitor.Model.DatabaseModel.DTO;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -16,13 +17,13 @@ namespace HeartRateMonitor.ViewModel.DBViewModel
         public event PropertyChangedEventHandler PropertyChanged;
 
 
-        public ObservableCollection<Scene> Scenes { get; set; }
+        public ObservableCollection<SceneDTO> Scenes { get; set; }
 
-        private Scene _selectedScene { get; set; }
+        private SceneDTO _selectedScene { get; set; }
         private SceneModelBL _sceneModelBL;
 
         #region свойства
-        public Scene SelectedScene
+        public SceneDTO SelectedScene
         {
             get { return _selectedScene; }
             set
@@ -78,7 +79,8 @@ namespace HeartRateMonitor.ViewModel.DBViewModel
         public ScenesVM()
         {
            _sceneModelBL = new SceneModelBL();
-            Scenes = new ObservableCollection<Scene>(_sceneModelBL.GetAllScenes());
+            //Scenes = new ObservableCollection<Scene>(_sceneModelBL.GetAllScenes());
+            Scenes = new ObservableCollection<SceneDTO>(_sceneModelBL.GetAllScenesWithType());
         }
 
         public void Update()
