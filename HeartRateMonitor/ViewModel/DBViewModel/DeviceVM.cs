@@ -16,14 +16,14 @@ namespace HeartRateMonitor.ViewModel.DBViewModel
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public ObservableCollection<Device> Devices { get; set; }
+        public ObservableCollection<DeviceDTO> Devices { get; set; }
 
-        private Device _selectedDevice { get; set; }
+        private DeviceDTO _selectedDevice { get; set; }
 
         private DeviceModelDB deviceModelDB;
 
         #region свойства
-        public Device SelectedDevice
+        public DeviceDTO SelectedDevice
         {
             get { return _selectedDevice; }
             set
@@ -33,25 +33,25 @@ namespace HeartRateMonitor.ViewModel.DBViewModel
             }
         }
 
-        public int Id
-        {
-            get { return _selectedDevice.Id; }
-            set
-            {
-                _selectedDevice.Id = value;
-                OnPropertyChanged();
-            }
-        }
+        //public int Id
+        //{
+        //    get { return _selectedDevice.Id; }
+        //    set
+        //    {
+        //        _selectedDevice.Id = value;
+        //        OnPropertyChanged();
+        //    }
+        //}
 
-        public int IdCompany
-        {
-            get { return _selectedDevice.IdCompany; }
-            set
-            {
-                _selectedDevice.IdCompany = value;
-                OnPropertyChanged();
-            }
-        }
+        //public int IdCompany
+        //{
+        //    get { return _selectedDevice.IdCompany; }
+        //    set
+        //    {
+        //        _selectedDevice.IdCompany = value;
+        //        OnPropertyChanged();
+        //    }
+        //}
 
         public string Name
         {
@@ -89,7 +89,7 @@ namespace HeartRateMonitor.ViewModel.DBViewModel
         public DeviceVM()
         {
             deviceModelDB = new DeviceModelDB();
-            Devices = new ObservableCollection<Device>(deviceModelDB.GetAllDevices());
+            Devices = new ObservableCollection<DeviceDTO>(deviceModelDB.GetAllDevices());
             //Devices = new ObservableCollection<DeviceDTO>(deviceModelDB.GetAllDevicesWithCompany());
            
         }

@@ -12,27 +12,48 @@
     <Grid>
 
         <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="0.8*" />
-            </Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="0.9*" />
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-                <RowDefinition Height="0.2*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="0.2*" />
         </Grid.RowDefinitions>
-         <ListBox Grid.Column="0" ItemsSource="{Binding Devices}"
+        <ListBox Grid.Column="0" ItemsSource="{Binding Devices}"
                  SelectedItem="{Binding SelectedDevice}">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel Margin="5">
-                            <TextBlock FontSize="18" Text="{Binding Path=Id}" />
-                            <TextBlock Text="{Binding Path=IdCompany}" />
-                            <TextBlock Text="{Binding Path=Name}" />
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Margin="5">
+                        <TextBlock FontSize="18" Text="{Binding Path=Name}" />
                         <TextBlock Text="{Binding Path=Type}" />
                         <TextBlock Text="{Binding Path=Company.Name}" />
                     </StackPanel>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
         </ListBox>
+        <Grid Margin="10" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="30"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="70" />
+                <ColumnDefinition/>
+                <ColumnDefinition Width="70" />
+                <ColumnDefinition/>
+                <ColumnDefinition Width="70"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Row="0" Grid.Column="1" Content="Name" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <Label Grid.Row="0" Grid.Column="3" Content="Type" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <Label Grid.Row="0" Grid.Column="5" Content="Company" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <TextBox  Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" TextWrapping="Wrap"  VerticalAlignment="Top" Width="70" Text="{Binding SelectedDevice.Name}" Cursor="Arrow" />
+            <TextBox x:Name="tbName" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center"  TextWrapping="Wrap"  VerticalAlignment="Top" Width="70" />
+            <TextBox x:Name="tbMiddle" Grid.Row="1" Grid.Column="4" HorizontalAlignment="Center"  TextWrapping="Wrap"  VerticalAlignment="Top" Width="70" />
+        </Grid>
     </Grid>
-    
 </Page>
