@@ -10,10 +10,10 @@ namespace HeartRateMonitor.Model.DatabaseModel.DTO
     public class CompanyDTO
     {
         
-        public int Id { get; set; }
+       // public int Id { get; set; }
       
         public string Name { get; set; }
 
-        public List<Device> Devices { get; set; }
+       // public List<Device> Devices { get; set; }
     }
 }

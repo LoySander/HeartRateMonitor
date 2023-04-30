@@ -1,6 +1,6 @@
-﻿using HeartRateMonitor.Model.DatabaseModel;
-using HeartRateMonitor.Model.DatabaseModel.Context;
+﻿using HeartRateMonitor.Model.DatabaseModel.Context;
 using HeartRateMonitor.Model.DatabaseModel.DTO;
+using HeartRateMonitor.Model.DatabaseModel;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -12,86 +12,81 @@ using System.Threading.Tasks;
 
 namespace HeartRateMonitor.ViewModel.DBViewModel
 {
-    public class DeviceVM:INotifyPropertyChanged
+    public class DeviceVM
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public ObservableCollection<DeviceDTO> Devices { get; set; }
+        private DeviceDTO _DeviceDTO { get; set; }
 
-        private DeviceDTO _selectedDevice { get; set; }
-
-        private DeviceModelDB deviceModelDB;
+        private DeviceModelDB _deviceModelDB;
 
         #region свойства
-        public DeviceDTO SelectedDevice
+        public DeviceDTO DeviceDTO
         {
-            get { return _selectedDevice; }
+            get { return _DeviceDTO; }
             set
             {
-                _selectedDevice = value;
+                _DeviceDTO = value;
                 OnPropertyChanged();
             }
         }
 
-        //public int Id
+        //public Company Company
         //{
-        //    get { return _selectedDevice.Id; }
+        //    get { return _selectedDevice.Company; }
         //    set
         //    {
-        //        _selectedDevice.Id = value;
+        //        _selectedDevice.Company = value;
         //        OnPropertyChanged();
         //    }
         //}
 
-        //public int IdCompany
-        //{
-        //    get { return _selectedDevice.IdCompany; }
-        //    set
-        //    {
-        //        _selectedDevice.IdCompany = value;
-        //        OnPropertyChanged();
-        //    }
-        //}
-
+      
         public string Name
         {
-            get { return _selectedDevice.Name; }
+            get { return _DeviceDTO.Name; }
             set
             {
-                _selectedDevice.Name = value;
+                _DeviceDTO.Name = value;
                 OnPropertyChanged();
             }
         }
 
         public Byte? Type
         {
-            get { return _selectedDevice.Type; }
+            get { return _DeviceDTO.Type; }
             set
             {
-                _selectedDevice.Type = value;
+                _DeviceDTO.Type = value;
                 OnPropertyChanged();
             }
 
         }
-        
+
         public string NameCompany
         {
-            get { return _selectedDevice.Company.Name; }
+            get { return _DeviceDTO.Company.Name; }
             set
             {
-                _selectedDevice.Company.Name = value;
+                _DeviceDTO.Company.Name = value;
                 OnPropertyChanged();
             }
         }
-      
+
+        public Company Company
+        {
+            get { return _DeviceDTO.Company; }
+            set {
+                _DeviceDTO.Company = value;
+                OnPropertyChanged();
+            }
+        }
         #endregion
 
-        public DeviceVM()
+        public DeviceVM(DeviceDTO deviceDTO)
         {
-            deviceModelDB = new DeviceModelDB();
-            Devices = new ObservableCollection<DeviceDTO>(deviceModelDB.GetAllDevices());
-            //Devices = new ObservableCollection<DeviceDTO>(deviceModelDB.GetAllDevicesWithCompany());
-           
+            //deviceModelDB = new DeviceModelDB();
+            DeviceDTO = deviceDTO;
         }
 
         public void Update()

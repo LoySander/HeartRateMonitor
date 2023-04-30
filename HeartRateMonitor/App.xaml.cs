@@ -25,7 +25,7 @@ namespace HeartRateMonitor
             IocContainer.Register<UserVM>();
             IocContainer.Register<MainVM>();
             IocContainer.Register<DatabaseMainVM>();
-            IocContainer.Register<DeviceVM>();
+            IocContainer.Register<DevicesVM>();
             IocContainer.Register<ParametersVM>();
             IocContainer.Register<ScenesVM>();
             IocContainer.Register<UsersVM>();

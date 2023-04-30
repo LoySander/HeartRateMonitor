@@ -201,6 +201,7 @@
     <Compile Include="Services\IocContainer.cs" />
     <Compile Include="ViewModel\ConnectionBLEViewModel.cs" />
     <Compile Include="ViewModel\DBViewModel\DatabaseMainVM.cs" />
+    <Compile Include="ViewModel\DBViewModel\DevicesVM.cs" />
     <Compile Include="ViewModel\DBViewModel\DeviceVM.cs" />
     <Compile Include="ViewModel\DBViewModel\ParametersVM.cs" />
     <Compile Include="ViewModel\DBViewModel\ScenesVM.cs" />

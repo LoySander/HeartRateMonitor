@@ -1,6 +1,7 @@
 ﻿using HeartRateMonitor.Interfaces;
 using HeartRateMonitor.Model.DatabaseModel.Context;
 using HeartRateMonitor.Model.DatabaseModel.DTO;
+using HeartRateMonitor.ViewModel.DBViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,10 +14,12 @@ namespace HeartRateMonitor.Model.DatabaseModel
     public class DeviceModelDB
     {
         private IRepository<Device> _deviceRepository;
+        
 
         public DeviceModelDB()
         {
             _deviceRepository = new DeviceRepository();
+
         }
 
         public  IEnumerable<DeviceDTO> GetAllDevices()
@@ -35,23 +38,38 @@ namespace HeartRateMonitor.Model.DatabaseModel
          
         }
 
-        //public IEnumerable<DeviceDTO> GetAllDevicesWithCompany()
-        //{
-        //    //using (ApplicationContext context = new ApplicationContext())
-        //    //{
-        //    //    var x = context.Devices.ToList();
-        //    //    var z = context.Companies.ToList();
-        //    //    var users = from u in context.Devices
-        //    //                join c in context.Companies on u.IdCompany equals c.Id
-        //    //                select new DeviceDTO {
-        //    //                    Id = u.Id,
-        //    //                    IdCompany = u.IdCompany,
-        //    //                    Name = u.Name,
-        //    //                    Type = u.Type,
-        //    //                    Company = c
-        //    //                };
-        //    //    return users.ToList();
-        //    //}
-        //}
+        public IEnumerable<DeviceVM> GetAllDeviceDTO()
+        {
+            List<DeviceVM> deviceVMs = new List<DeviceVM>();
+            foreach(var x in _deviceRepository.GetAllList())
+            {
+             
+                deviceVMs.Add(new DeviceVM(new DeviceDTO
+                {
+                    Name = x.Name,
+                    Type = x.Type,
+                    Company = x.Company
+                }));
+            }
+
+
+            return deviceVMs;
+
+        }
+
+        public IEnumerable<Company> GetAllCompany()
+        {
+            using (ApplicationContext context = new ApplicationContext())
+            {
+               // var x = context.Devices.ToList();
+               var z = context.Companies.ToList();
+                //var companies = from u in context.Companies
+                //            //select new CompanyDTO
+                //            //{  
+                //            //    Name = u.Name,
+                //            //};
+                return z.ToList();
+            }
+        }
     }
 }
