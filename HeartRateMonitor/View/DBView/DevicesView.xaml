@@ -88,6 +88,7 @@
                     </Style>
                 </Grid.Resources>
                 <Grid.RowDefinitions>
+                    <RowDefinition MinHeight="50"/>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="30" />
                     <RowDefinition Height="Auto" />
@@ -101,30 +102,42 @@
 
                 </Grid.ColumnDefinitions>
 
-                <TextBlock  Grid.Row="0"
+                <TextBlock  Grid.Row="1"
                    Grid.Column="1"
                    Style="{StaticResource FieldHeader}"
                    Text="Имя устройства" />
-                <TextBlock  Grid.Row="0"
+                <TextBlock  Grid.Row="1"
                    Grid.Column="2"
                    Style="{StaticResource FieldHeader}"
                    Text="Производитель" />
-                <TextBlock  Grid.Row="0"
+                <TextBlock  Grid.Row="1"
                    Grid.Column="3"
                    Style="{StaticResource FieldHeader}"
                    Text="Тип" />
 
-                <TextBox Margin="1" Grid.Row="1" Grid.Column="1" Cursor="Arrow" Text="{Binding Path=SelectedDevice.Name,UpdateSourceTrigger=PropertyChanged}" />
-                <ComboBox Margin="1" Grid.Row="1" Grid.Column="2" ItemsSource="{Binding Path=Companies}" SelectedItem="{Binding SelectedDevice.Company, UpdateSourceTrigger=PropertyChanged}">
+                <TextBox Margin="1" Grid.Row="2" Grid.Column="1" Cursor="Arrow" Text="{Binding Path=SelectedDevice.Name,UpdateSourceTrigger=PropertyChanged}" />
+                <ComboBox Margin="1" Grid.Row="2" Grid.Column="2" ItemsSource="{Binding Path=Companies}" SelectedItem="{Binding SelectedDevice.Company, UpdateSourceTrigger=PropertyChanged}">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding Name}"/>
                         </DataTemplate>
                     </ComboBox.ItemTemplate>
                 </ComboBox>
-                <ComboBox Margin="1" Grid.Row="1" Grid.Column="3" />
-           
-            <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="5">
+                <ComboBox Margin="1" Grid.Row="2" Grid.Column="3" />
+                <StackPanel  Orientation="Horizontal" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3">
+                    <materialDesign:Badged x:Name="CountingBadge" BadgeColorZoneMode="PrimaryDark">
+                        <Button Margin="5" Width="Auto" Style="{StaticResource MaterialDesignRaisedLightButton}"  Content="Изменить"
+                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Cursor="Hand" />
+                </materialDesign:Badged>
+                    <materialDesign:Badged x:Name="CountingBadge2" BadgeColorZoneMode="PrimaryDark">
+                        <Button Margin="5" Width="Auto" Style="{StaticResource MaterialDesignRaisedLightButton}"  Content="Удалить"
+                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Cursor="Hand" />
+                    </materialDesign:Badged>
+                    <materialDesign:Badged x:Name="CountingBadge3" BadgeColorZoneMode="PrimaryDark">
+                    <Button Margin="5"  Content="{materialDesign:PackIcon Update}" ToolTip="Icon" IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" Cursor="Hand" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </materialDesign:Badged>
+                </StackPanel>
+        <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="5">
                 <materialDesign:PopupBox StaysOpen="True" IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}">
                     <Grid Width="300" Margin="8,8,8,8">
                         <Grid.Resources>

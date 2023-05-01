@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Runtime.Remoting.Contexts;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -20,6 +21,7 @@ namespace HeartRateMonitor.Model.DatabaseModel
         public void Create(Device item)
         {
            _context.Devices.Add(item);
+           _context.SaveChanges();
         }
 
         public void Delete(int id)
