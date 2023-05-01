@@ -19,6 +19,7 @@ namespace HeartRateMonitor.ViewModel.DBViewModel
 
         public ObservableCollection<DeviceDTO> Devices { get; set; }
         public ObservableCollection<Company> Companies { get; set; }
+        public ObservableCollection<Byte> Types { get; set; } = new ObservableCollection<Byte>() {0,1};
 
         private DeviceModelDB _deviceModelDB;
         private Company _company;
@@ -65,7 +66,7 @@ namespace HeartRateMonitor.ViewModel.DBViewModel
         {
             _deviceModelDB = new DeviceModelDB();
            // Devices = new ObservableCollection<DeviceVM>(_deviceModelDB.GetAllDeviceDTO());
-           Devices = new ObservableCollection<DeviceDTO>(_deviceModelDB.GetAllDevices());
+            Devices = new ObservableCollection<DeviceDTO>(_deviceModelDB.GetAllDevices());
             Companies = new ObservableCollection<Company>(_deviceModelDB.GetAllCompany());
             //Devices = new ObservableCollection<DeviceDTO>(deviceModelDB.GetAllDevicesWithCompany());
            
